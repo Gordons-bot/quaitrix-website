@@ -1,0 +1,62 @@
+---
+import EditorPanel from '~/components/editor/EditorPanel.jsx';
+import PrototypeRenderer from '~/components/prototype/PrototypeRenderer.jsx';
+
+export async function getStaticPaths() {
+  return [{ params: { token: 'lite' } }];
+}
+
+const json = {
+  meta: { templateId: 'service-landing-v1', schemaVersion: 1, businessName: 'Acme Consulting' },
+  theme: { palette: 'indigo', accent: 'amber', headingFont: 'sora', bodyFont: 'inter', radius: 'md' },
+  sections: [
+    {
+      id: 'sec_hero', type: 'hero', visible: true, variant: 'centered',
+      props: {
+        headline: { text: 'Professional Service for Your Business' },
+        subhead: { text: 'We deliver excellence with dedication and expertise.' },
+        ctaPrimary: { text: 'Get Started', action: 'scrollTo:contact' },
+        ctaSecondary: { text: 'Learn More', action: 'scrollTo:features' },
+        image: { source: 'unsplash', id: 'photo-1521737711867-e3b97375f902', alt: 'professional team' }
+      }
+    },
+    {
+      id: 'sec_features', type: 'feature-grid', visible: true, variant: 'three-col',
+      props: {
+        heading: { text: 'Why Choose Us' },
+        items: [
+          { title: { text: 'Lightning Fast' }, body: { text: 'Quick turnaround.' }, icon: 'bolt' },
+          { title: { text: 'Reliable' }, body: { text: 'Trusted by 100+ clients.' }, icon: 'shield' },
+          { title: { text: 'Affordable' }, body: { text: 'Transparent pricing.' }, icon: 'dollar' }
+        ]
+      }
+    },
+    {
+      id: 'sec_contact', type: 'contact', visible: true, variant: 'standard',
+      props: { heading: { text: 'Get In Touch' }, subhead: { text: 'Send us a message.' } }
+    }
+  ]
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editor — Quaitrix</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div class="flex h-screen overflow-hidden">
+    <div class="w-80 shrink-0 overflow-hidden bg-gray-50 border-r border-gray-200">
+      <EditorPanel json={json} token="lite" client:load />
+    </div>
+    <div class="flex-1 overflow-y-auto bg-gray-200 p-4">
+      <div class="bg-white shadow-lg rounded-xl overflow-hidden min-h-[600px]">
+        <PrototypeRenderer json={json} client:load />
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -42,9 +42,11 @@ const { language, textDirection } = I18N;
     <ClientRouter fallback="swap" />
   </head>
 
-  <body class="antialiased text-default bg-page tracking-tight">
-    <slot />
-
+  <body class="antialiased text-gray-900 tracking-tight" style="background-image: url('/hero-bg.jpg'); background-size: cover; background-position: center; background-attachment: scroll; background-repeat: no-repeat; background-color: #ffffff; padding-top: 116px;">
+    <div class="min-h-screen bg-white/80 backdrop-blur-sm">
+      <slot />
+    </div>
     <BasicScripts />
+    <script src="/liaison-widget.js" is:inline={false}></script>
   </body>
 </html>

@@ -1,0 +1,126 @@
+---
+import PageLayout from '~/layouts/PageLayout.astro';
+---
+
+<PageLayout title="Start Your Project">
+  <div class="max-w-2xl mx-auto p-6 bg-white/70 backdrop-blur-sm rounded-lg shadow mt-10">
+    <h1 class="text-3xl font-bold mb-2 text-center">Start Your Project</h1>
+    <p class="text-gray-600 text-center mb-8">Tell us what you need. We'll reply within 24 hours.</p>
+
+    <form id="projectForm">
+      <!-- Slide 1 -->
+      <div class="slide" id="slide-1">
+        <h3 class="text-xl font-semibold mb-4">1. What type of project do you need?</h3>
+        <label class="block p-3 border rounded mb-2 cursor-pointer hover:bg-gray-50"><input type="radio" name="project_type" value="Android App" required class="mr-2"> Android App</label>
+        <label class="block p-3 border rounded mb-2 cursor-pointer hover:bg-gray-50"><input type="radio" name="project_type" value="Website" class="mr-2"> Website</label>
+        <label class="block p-3 border rounded mb-2 cursor-pointer hover:bg-gray-50"><input type="radio" name="project_type" value="Both" class="mr-2"> Both</label>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="slide hidden" id="slide-2">
+        <h3 class="text-xl font-semibold mb-4">2. What is the main purpose?</h3>
+        <label class="block p-3 border rounded mb-2 cursor-pointer hover:bg-gray-50"><input type="radio" name="purpose" value="Business Presence" required class="mr-2"> Business Presence</label>
+        <label class="block p-3 border rounded mb-2 cursor-pointer hover:bg-gray-50"><input type="radio" name="purpose" value="E-commerce" class="mr-2"> E-commerce</label>
+        <label class="block p-3 border rounded mb-2 cursor-pointer hover:bg-gray-50"><input type="radio" name="purpose" value="Portfolio" class="mr-2"> Portfolio</label>
+        <label class="block p-3 border rounded mb-2 cursor-pointer hover:bg-gray-50"><input type="radio" name="purpose" value="Other" class="mr-2"> Other</label>
+      </div>
+<!-- Slide 3 (Contact) -->
+      <div class="slide hidden" id="slide-3">
+        <h3 class="text-xl font-semibold mb-4">3. Contact Information</h3>
+        <input type="text" name="name" placeholder="Your Name" required class="w-full p-3 border rounded mb-3">
+        <input type="email" name="email" placeholder="Email Address" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,}$" title="Please enter a valid email address" class="w-full p-3 border rounded mb-3">
+        <input type="tel" name="phone" placeholder="Phone / WhatsApp (Optional)" pattern="[+]?[(]?[0-9]{1,4}[)]?[- ./0-9]*" title="Please enter a valid phone number" class="w-full p-3 border rounded mb-3">
+        <textarea name="message" placeholder="Any specific details? (Optional)" class="w-full p-3 border rounded mb-3"></textarea>
+      </div>
+
+      <!-- Success Message -->
+      <div class="slide hidden text-center" id="slide-success">
+        <h3 class="text-2xl font-bold text-green-600 mb-4">Thank You!</h3>
+        <p class="text-gray-600">We have received your request and will contact you within 24 hours.</p>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="flex justify-between mt-6" id="nav-buttons">
+        <button type="button" id="prevBtn" class="px-6 py-2 bg-gray-200 rounded hidden" onclick="changeSlide(-1)">Previous</button>
+        <button type="button" id="nextBtn" class="px-6 py-2 bg-blue-600 text-white rounded opacity-50 cursor-not-allowed" disabled onclick="changeSlide(1)">Next</button>
+        <button type="button" id="submitBtn" class="px-6 py-2 bg-green-600 text-white rounded hidden" onclick="submitForm()">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 3;
+
+    function updateButtons() {
+      const nextBtn = document.getElementById('nextBtn');
+      const prevBtn = document.getElementById('prevBtn');
+      const submitBtn = document.getElementById('submitBtn');
+      
+      // Check if current slide inputs are valid to enable Next
+      const currentSlideEl = document.getElementById('slide-' + currentSlide);
+      const inputs = currentSlideEl.querySelectorAll('input[required]');
+      let isValid = true;
+      inputs.forEach(input => {
+        if (input.type === 'radio') {
+          if (!currentSlideEl.querySelector(`input[name="${input.name}"]:checked`)) isValid = false;
+        } else {
+          if (!input.value.trim() || !input.checkValidity()) isValid = false;
+        }
+      });
+
+      if (currentSlide === totalSlides) {
+        nextBtn.classList.add('hidden');
+        submitBtn.classList.remove('hidden');
+        submitBtn.disabled = !isValid;
+        submitBtn.className = isValid ? "px-6 py-2 bg-green-600 text-white rounded" : "px-6 py-2 bg-gray-400 text-white rounded cursor-not-allowed";
+      } else {
+        nextBtn.classList.remove('hidden');
+        submitBtn.classList.add('hidden');
+        nextBtn.disabled = !isValid;
+        nextBtn.className = isValid ? "px-6 py-2 bg-blue-600 text-white rounded" : "px-6 py-2 bg-gray-400 text-white rounded cursor-not-allowed";
+      }
+
+      prevBtn.classList.toggle('hidden', currentSlide === 1);
+    }
+
+    function changeSlide(n) {
+      document.getElementById('slide-' + currentSlide).classList.add('hidden');
+      currentSlide += n;
+      document.getElementById('slide-' + currentSlide).classList.remove('hidden');
+      updateButtons();
+    }
+
+    async function submitForm() {
+      const form = document.getElementById('projectForm');
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const res = await fetch('/api/questionnaire/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (res.ok) {
+          document.getElementById('slide-' + currentSlide).classList.add('hidden');
+          document.getElementById('slide-success').classList.remove('hidden');
+          document.getElementById('nav-buttons').classList.add('hidden');
+        }
+      } catch (err) {
+        alert('Error submitting form. Please try again.');
+      }
+    }
+// Listen to all inputs to update button states immediately
+    document.querySelectorAll('input, textarea').forEach(el => {
+      el.addEventListener('input', updateButtons);
+      el.addEventListener('change', updateButtons);
+    });
+
+    updateButtons(); // Init
+
+    // Expose to inline onclick handlers (Astro module scope otherwise hides them)
+    window.changeSlide = changeSlide;
+    window.submitForm = submitForm;
+  </script>
+</PageLayout>

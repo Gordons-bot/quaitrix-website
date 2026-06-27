@@ -45,7 +45,7 @@ const columnsClass =
               </div>
               <div class="mt-0.5">
                 {itemTitle && <h3 class="text-xl font-bold">{itemTitle}</h3>}
-                {description && <p class:list={[{ 'mt-3': itemTitle }, 'text-muted']} set:html={description} />}
+                {description && <p class:list={[{ 'mt-3': itemTitle }, 'text-gray-600']} set:html={description} />}
                 {callToAction && (
                   <div class:list={[{ 'mt-3': itemTitle || description }]}>
                     <Button variant="link" {...callToAction} />

@@ -112,6 +112,8 @@ export default function EditorPanel({ json: providedJson, token }) {
   const [currentJson, setCurrentJson] = useState(providedJson || FALLBACK_JSON);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [error, setError] = useState(null);
+  const [validationErrors, setValidationErrors] = useState([]);
 
   useEffect(() => {
     if (providedJson || !token) return;
@@ -145,33 +147,54 @@ export default function EditorPanel({ json: providedJson, token }) {
 
   const saveEdit = async () => {
     setSaving(true);
+    setError(null);
+    setValidationErrors([]);
     try {
       const res = await fetch(`/api/prototype/${token}/edit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(currentJson)
       });
+      const data = await res.json();
       if (res.ok) {
         setSaved(true);
         setTimeout(() => setSaved(false), 2000);
+      } else {
+        if (data.details) setValidationErrors(data.details);
+        setError(data.error || 'Save failed');
       }
-    } catch (e) { console.error('Save failed:', e); }
+    } catch (e) {
+      setError('Connection error. Please try again.');
+    }
     setSaving(false);
   };
 
   const approve = async () => {
+    setSaving(true);
+    setError(null);
+    setValidationErrors([]);
     try {
       const res = await fetch(`/api/prototype/${token}/approve`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ json: currentJson })
       });
+      const data = await res.json();
       if (res.ok) {
-        const data = await res.json();
-        alert('Demo approved! Building static site...');
-        if (data.demo_url) window.open(data.demo_url, '_blank');
+        // Show success with link to updated demo
+        setSaved(true);
+        if (data.demo_url) {
+          setTimeout(() => window.open(data.demo_url, '_blank'), 500);
+        }
+        setTimeout(() => setSaved(false), 3000);
+      } else {
+        if (data.details) setValidationErrors(data.details);
+        setError(data.error || 'Approve failed');
       }
-    } catch (e) { console.error('Approve failed:', e); }
+    } catch (e) {
+      setError('Connection error. Please try again.');
+    }
+    setSaving(false);
   };
 
   const renderField = (fieldKey, def, sectionIdx) => {
@@ -198,7 +221,23 @@ export default function EditorPanel({ json: providedJson, token }) {
   return (
     <div className="h-full flex flex-col">
       <div className="flex-1 overflow-y-auto p-4">
-        <h2 className="text-lg font-bold text-gray-900 mb-4">🎨 Demo Editor</h2>
+        <h2 className="text-lg font-bold text-gray-900 mb-4">Demo Editor</h2>
+
+        {/* Validation / Error Display */}
+        {(validationErrors.length > 0 || error) && (
+          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+            <p className="text-xs font-semibold text-red-700 mb-1">{error}</p>
+            {validationErrors.map((err, i) => (
+              <p key={i} className="text-xs text-red-600">{err}</p>
+            ))}
+          </div>
+        )}
+
+        {saved && (
+          <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+            <p className="text-xs font-semibold text-green-700">Success! Demo updated.</p>
+          </div>
+        )}
 
         {/* Theme Controls */}
         <div className="mb-5 p-3 bg-white rounded-xl border border-gray-200">
@@ -243,11 +282,11 @@ export default function EditorPanel({ json: providedJson, token }) {
       <div className="p-4 bg-white border-t border-gray-200 space-y-2">
         <button onClick={saveEdit} disabled={saving}
           className="w-full px-4 py-2 bg-gray-800 text-white text-sm font-medium rounded-lg hover:bg-gray-700 disabled:opacity-50">
-          {saving ? 'Saving...' : saved ? '✓ Saved!' : 'Save Changes'}
+          {saving ? 'Saving...' : saved ? 'Saved!' : 'Save Changes'}
         </button>
-        <button onClick={approve}
-          className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700">
-          Approve & Build Site
+        <button onClick={approve} disabled={saving}
+          className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 disabled:opacity-50">
+          Approve & Rebuild Site
         </button>
       </div>
     </div>

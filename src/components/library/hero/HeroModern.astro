@@ -1,0 +1,34 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  ctaText?: string;
+  ctaHref?: string;
+}
+const {
+  title = 'Build faster with clarity',
+  description = 'A systematic builder pattern that turns customer preferences into polished, production-ready websites.',
+  ctaText = 'Get started',
+  ctaHref = '#contact',
+} = Astro.props;
+---
+<section class="bg-white">
+  <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl text-center px-4">
+      <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl text-balance overflow-wrap-break-word">
+        {title}
+      </h1>
+      <p class="mt-6 text-lg leading-8 text-slate-600">
+        {description}
+      </p>
+      <div class="mt-10 flex items-center justify-center gap-x-6">
+        <a
+          href={ctaHref}
+          class="rounded-lg bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900"
+        >
+          {ctaText}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

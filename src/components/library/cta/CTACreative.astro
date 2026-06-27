@@ -1,0 +1,30 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  ctaText?: string;
+  ctaHref?: string;
+}
+const {
+  title = 'NO LIMITS',
+  description = 'Hard edges. Hard shadows. No softness.',
+  ctaText = 'Go brutal',
+  ctaHref = '#contact',
+} = Astro.props;
+---
+<section class="bg-amber-50 py-16">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-8 rounded-none border-2 border-slate-900 bg-amber-50 p-10 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] sm:flex-row">
+      <div>
+        <h2 class="text-2xl font-mono uppercase tracking-widest text-slate-900">{title}</h2>
+        <p class="mt-2 text-slate-900">{description}</p>
+      </div>
+      <a
+        href={ctaHref}
+        class="rounded-none border-2 border-slate-900 bg-amber-400 px-5 py-3 text-sm font-bold uppercase tracking-widest text-slate-900 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:bg-amber-300"
+      >
+        {ctaText}
+      </a>
+    </div>
+  </div>
+</section>
