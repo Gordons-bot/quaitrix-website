@@ -11,6 +11,7 @@ import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
 import icon from 'astro-icon';
 import compress from 'astro-compress';
+import react from '@astrojs/react';
 import type { AstroIntegration } from 'astro';
 
 import astrowind from './vendor/integration';
@@ -27,6 +28,7 @@ export default defineConfig({
   output: 'static',
 
   integrations: [
+    react(),
     sitemap(),
     mdx(),
     icon({

@@ -1,0 +1,42 @@
+---
+// EditorLayout.astro — Minimal layout for demo editor pages
+// FROZEN TEMPLATE — Do not modify without PR + human review
+// Split-pane: editor panel (left) + live preview (right)
+interface Props {
+  title?: string;
+}
+
+const { title = 'Demo Editor — Quaitrix' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <script is:inline src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-screen overflow-hidden bg-gray-100 antialiased">
+  <!-- Editor toolbar -->
+  <header class="bg-white border-b border-gray-200 h-14 flex items-center px-4 shrink-0">
+    <div class="font-semibold text-gray-900">Quaitrix Editor</div>
+    <div class="ml-auto text-sm text-gray-500">Customize your demo</div>
+  </header>
+
+  <!-- Split panes -->
+  <div class="flex h-[calc(100vh-3.5rem)] overflow-hidden">
+    <!-- Left: Editor controls -->
+    <aside class="w-80 shrink-0 bg-white border-r border-gray-200 overflow-y-auto">
+      <slot name="panel" />
+    </aside>
+
+    <!-- Right: Live preview -->
+    <main class="flex-1 overflow-y-auto bg-gray-200 p-4">
+      <div class="bg-white shadow-lg rounded-xl overflow-hidden min-h-[600px]">
+        <slot name="preview" />
+      </div>
+    </main>
+  </div>
+</body>
+</html>

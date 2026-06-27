@@ -1,0 +1,24 @@
+---
+// editor/[token].astro — Demo editor with split-pane interface (client-side fetch)
+// JSON is fetched by the React components at runtime — no build-time filesystem access
+import EditorLayout from '~/layouts/EditorLayout.astro';
+import EditorPanel from '~/components/editor/EditorPanel.jsx';
+import PrototypeRenderer from '~/components/prototype/PrototypeRenderer.jsx';
+
+export async function getStaticPaths() {
+  return [
+    { params: { token: 'test-prototype' } }
+  ];
+}
+
+const { token } = Astro.params;
+---
+
+<EditorLayout title="Demo Editor — Quaitrix">
+  <Fragment slot="panel">
+    <EditorPanel client:load="react" token={token} />
+  </Fragment>
+  <Fragment slot="preview">
+    <PrototypeRenderer client:load="react" token={token} />
+  </Fragment>
+</EditorLayout>

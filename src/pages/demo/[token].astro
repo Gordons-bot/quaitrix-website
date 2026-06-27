@@ -1,0 +1,18 @@
+---
+// demo/[token].astro — Renders a prototype demo from JSON (client-side fetch)
+// JSON is fetched by the React component at runtime — no build-time filesystem access
+import DemoLayout from '~/layouts/DemoLayout.astro';
+import PrototypeRenderer from '~/components/prototype/PrototypeRenderer.jsx';
+
+export async function getStaticPaths() {
+  return [
+    { params: { token: 'test-prototype' } }
+  ];
+}
+
+const { token } = Astro.params;
+---
+
+<DemoLayout title={`Demo Preview — Quaitrix`}>
+  <PrototypeRenderer client:load="react" token={token} />
+</DemoLayout>
