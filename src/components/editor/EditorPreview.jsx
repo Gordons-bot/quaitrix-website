@@ -1,10 +1,9 @@
-// PrototypeRenderer.jsx — Maps JSON sections → React components
-// STATIC: Receives full JSON as prop, renders at build time into static HTML.
-// No client-side fetching. Content is baked in by Astro's prerender.
-import React from 'react';
-import Hero from './Hero';
-import FeatureGrid from './FeatureGrid';
-import Contact from './Contact';
+// EditorPreview.jsx — Client-side preview for the editor
+// Fetches JSON at runtime, can be updated live as user edits
+import React, { useState, useEffect } from 'react';
+import Hero from '../prototype/Hero';
+import FeatureGrid from '../prototype/FeatureGrid';
+import Contact from '../prototype/Contact';
 
 const componentMap = {
   hero: Hero,
@@ -12,7 +11,17 @@ const componentMap = {
   contact: Contact
 };
 
-export default function PrototypeRenderer({ json }) {
+export default function EditorPreview({ json: providedJson, token }) {
+  const [json, setJson] = useState(providedJson || null);
+
+  useEffect(() => {
+    if (providedJson || !token) return;
+    fetch(`/demo/${token}/prototype.json`)
+      .then(r => { if (!r.ok) throw new Error('not found'); return r.json(); })
+      .then(data => { if (data && data.sections) setJson(data); })
+      .catch(() => {});
+  }, [token, providedJson]);
+
   if (!json || !json.sections || json.sections.length === 0) {
     return <div className="p-8 text-center text-gray-500">No sections defined</div>;
   }
@@ -22,7 +31,6 @@ export default function PrototypeRenderer({ json }) {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
       <nav className="bg-white border-b border-gray-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 py-4 flex items-center justify-between">
           <div className="font-bold text-xl text-gray-900">
@@ -43,7 +51,6 @@ export default function PrototypeRenderer({ json }) {
         </div>
       </nav>
 
-      {/* Sections */}
       {sectionsWithTheme.map((section) => {
         if (section.visible === false) return null;
         const Component = componentMap[section.type];
@@ -51,7 +58,6 @@ export default function PrototypeRenderer({ json }) {
         return <Component key={section.id} section={section} />;
       })}
 
-      {/* Footer */}
       <footer className="bg-gray-900 text-gray-400 py-12">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 text-center text-sm">
           <p>

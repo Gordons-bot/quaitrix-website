@@ -1,9 +1,9 @@
 ---
 // editor/[token].astro — Demo editor with split-pane interface (client-side fetch)
-// JSON is fetched by the React components at runtime — no build-time filesystem access
+// The editor is inherently interactive — JSON is fetched client-side
 import EditorLayout from '~/layouts/EditorLayout.astro';
 import EditorPanel from '~/components/editor/EditorPanel.jsx';
-import PrototypeRenderer from '~/components/prototype/PrototypeRenderer.jsx';
+import EditorPreview from '~/components/editor/EditorPreview.jsx';
 
 export async function getStaticPaths() {
   return [
@@ -19,6 +19,6 @@ const { token } = Astro.params;
     <EditorPanel client:load="react" token={token} />
   </Fragment>
   <Fragment slot="preview">
-    <PrototypeRenderer client:load="react" token={token} />
+    <EditorPreview client:load="react" token={token} />
   </Fragment>
 </EditorLayout>
