@@ -1,0 +1,112 @@
+---
+// demo/[token].astro — Static generation: builds HTML for every demo token at build time
+// Content is BAKED into static HTML — zero client-side fetching
+import DemoLayout from '~/layouts/DemoLayout.astro';
+import PrototypeRenderer from '~/components/prototype/PrototypeRenderer.jsx';
+import { readdirSync, readFileSync, existsSync } from 'fs';
+import { resolve } from 'path';
+
+const DEMOS_DIR = '/var/www/demos';
+
+// ── Static Path Generation: scan /var/www/demos/ for all token folders ──
+export async function getStaticPaths() {
+  const paths = [];
+
+  try {
+    if (existsSync(DEMOS_DIR)) {
+      const entries = readdirSync(DEMOS_DIR, { withFileTypes: true });
+      for (const entry of entries) {
+        if (entry.isDirectory()) {
+          // Only include if prototype.json exists and has valid sections
+          const jsonPath = resolve(DEMOS_DIR, entry.name, 'prototype.json');
+          if (existsSync(jsonPath)) {
+            try {
+              const data = JSON.parse(readFileSync(jsonPath, 'utf8'));
+              if (data && data.sections && data.sections.length > 0) {
+                paths.push({ params: { token: entry.name } });
+              }
+            } catch {
+              /* skip invalid JSON */
+            }
+          }
+        }
+      }
+    }
+  } catch {
+    /* dir might not exist on first build */
+  }
+
+  // Fallback: at least build the test-prototype so dev/CI always has one page
+  if (paths.length === 0) {
+    paths.push({ params: { token: 'test-prototype' } });
+  }
+
+  return paths;
+}
+
+// ── Load JSON at build time — content goes directly into static HTML ──
+const token = Astro.params.token;
+
+let json = null;
+
+// Try loading from the demos directory
+try {
+  const jsonPath = resolve(DEMOS_DIR, token, 'prototype.json');
+  const raw = readFileSync(jsonPath, 'utf8');
+  const parsed = JSON.parse(raw);
+  if (parsed && parsed.sections && parsed.sections.length > 0) {
+    json = parsed;
+  }
+} catch {
+  /* fallback below */
+}
+
+// Fallback: inline default JSON so the page always renders something valid
+if (!json) {
+  json = {
+    meta: { templateId: 'service-landing-v1', schemaVersion: 1, businessName: 'Your Business' },
+    theme: { palette: 'indigo', accent: 'amber', headingFont: 'sora', bodyFont: 'inter', radius: 'md' },
+    sections: [
+      {
+        id: 'sec_hero',
+        type: 'hero',
+        visible: true,
+        variant: 'centered',
+        props: {
+          headline: { text: 'Your Website. Built Before You Pay.' },
+          subhead: { text: 'Preview your custom demo — no commitment required.' },
+          ctaPrimary: { text: 'Get Started', action: 'scrollTo:contact' },
+          ctaSecondary: { text: 'Learn More', action: 'scrollTo:features' },
+        },
+      },
+      {
+        id: 'sec_features',
+        type: 'feature-grid',
+        visible: true,
+        variant: 'three-col',
+        props: {
+          heading: { text: 'Why Quaitrix' },
+          items: [
+            { title: { text: 'Fast' }, body: { text: 'Demos delivered in minutes.' }, icon: 'bolt' },
+            { title: { text: 'Affordable' }, body: { text: 'Transparent pricing, no surprises.' }, icon: 'dollar' },
+            { title: { text: 'Professional' }, body: { text: 'Pixel-perfect, production-ready code.' }, icon: 'star' },
+          ],
+        },
+      },
+      {
+        id: 'sec_contact',
+        type: 'contact',
+        visible: true,
+        variant: 'standard',
+        props: { heading: { text: 'Get In Touch' }, subhead: { text: 'Ready to start? Send us a message.' } },
+      },
+    ],
+  };
+}
+
+const pageTitle = `${json.meta?.businessName || 'Demo'} — Prototype by Quaitrix`;
+---
+
+<DemoLayout title={pageTitle}>
+  <PrototypeRenderer json={json} />
+</DemoLayout>

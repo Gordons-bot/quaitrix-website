@@ -1,398 +1,517 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 
-import Hero from '~/components/widgets/Hero.astro';
-import Note from '~/components/widgets/Note.astro';
-import Features from '~/components/widgets/Features.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Content from '~/components/widgets/Content.astro';
-import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import Stats from '~/components/widgets/Stats.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-
 const metadata = {
-  title: 'AstroWind — Free template for creating websites with Astro + Tailwind CSS',
+  title: 'Quaitrix — We Build Your Website Before You Pay',
   ignoreTitleTemplate: true,
 };
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- HERO — Dark premium, high-impact -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="relative min-h-screen flex items-center justify-center bg-slate-950 overflow-hidden overflow-hidden">
+    <!-- Background image layer -->
+    <div
+      class="absolute inset-0 opacity-20"
+      style="background-image: url('/hero-bg.jpg'); background-size: cover; background-position: center; background-position: center;"
+    >
+    </div>
+    <!-- Gradient overlay for readability -->
+    <div class="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-slate-950/50 to-slate-950/80"></div>
+    <!-- Subtle grid pattern -->
+    <div
+      class="absolute inset-0 opacity-[0.03]"
+      style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 60px 60px;"
+    >
+    </div>
 
-  <Hero
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
-        target: '_blank',
-        icon: 'tabler:download',
-      },
-      { text: 'Learn more', href: '#features' },
-    ]}
-    image={{ src: '~/assets/images/hero-image.png', alt: 'AstroWind Hero Image' }}
-  >
-    <Fragment slot="title">
-      Free template for <span class="hidden xl:inline">creating websites with</span>
-      <span class="text-accent dark:text-white"> Astro v6</span> + Tailwind CSS
-    </Fragment>
+    <div class="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 text-center py-32">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-8">
+        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+        <span class="text-sm font-medium text-blue-300">Demo-First Development</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1] text-balance">
+        We Build Your Website<br class="hidden sm:block" />
+        <span class="bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">Before You Pay</span>
+      </h1>
+      <p class="mt-8 text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+        Get a free, personalized demo of your project before committing. No upfront risk — see exactly what you're
+        getting, then decide.
+      </p>
+      <div class="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/start-project"
+          class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl bg-blue-600 text-white hover:bg-blue-500 transition-all shadow-lg shadow-blue-600/25 hover:shadow-blue-500/40 hover:scale-[1.02]"
+        >
+          Start Your Free Demo
+          <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"
+            ></path></svg
+          >
+        </a>
+        <a
+          href="#how-it-works"
+          class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl border border-slate-600 text-slate-200 hover:bg-slate-800 hover:border-slate-500 transition-all hover:scale-[1.02]"
+        >
+          View Our Process
+        </a>
+      </div>
+      <!-- Social proof -->
+      <div class="mt-16 flex flex-wrap items-center justify-center gap-8 text-slate-500 text-sm">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"
+            ><path
+              fill-rule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+              clip-rule="evenodd"></path></svg
+          >
+          <span>No upfront payment</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"
+            ><path
+              fill-rule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+              clip-rule="evenodd"></path></svg
+          >
+          <span>15-minute demo turnaround</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"
+            ><path
+              fill-rule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+              clip-rule="evenodd"></path></svg
+          >
+          <span>Transparent pricing</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        <span class="font-semibold">AstroWind</span> is a free, customizable and production-ready template for Astro v6 +
-        Tailwind CSS v4.</span
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- HOW IT WORKS — 3-step process -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section id="how-it-works" class="relative py-24 sm:py-32 bg-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+      <div class="text-center mb-20">
+        <p class="text-sm font-semibold tracking-widest text-blue-600 uppercase mb-3">How It Works</p>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900">
+          Three steps to your dream project
+        </h2>
+        <p class="mt-5 text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          No lengthy proposals. No back-and-forth emails. Just a streamlined path from idea to reality.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 lg:gap-12">
+        <!-- Step 1 -->
+        <div class="relative p-8 rounded-2xl bg-slate-50 border border-slate-100">
+          <div class="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+              ></path></svg
+            >
+          </div>
+          <div class="absolute top-8 right-8 text-5xl font-bold text-slate-100">01</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Chat & Briefing</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Tell us about your project through our chat. Share your vision, goals, and preferences — it takes just 2
+            minutes.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="relative p-8 rounded-2xl bg-blue-50 border border-blue-100">
+          <div class="w-14 h-14 rounded-xl bg-blue-600 flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg
+            >
+          </div>
+          <div class="absolute top-8 right-8 text-5xl font-bold text-blue-100">02</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">We Build Your Demo</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Our team creates a personalized demo of your project. See exactly what you'll get — in about 15 minutes,
+            free.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="relative p-8 rounded-2xl bg-slate-50 border border-slate-100">
+          <div class="w-14 h-14 rounded-xl bg-green-100 flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
+            >
+          </div>
+          <div class="absolute top-8 right-8 text-5xl font-bold text-slate-100">03</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">You Review & Decide</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Love it? We proceed with full development. Not convinced? No pressure — the demo was completely free.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- WHY CHOOSE US — Trust signals -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="relative py-24 sm:py-32 bg-slate-900 overflow-hidden">
+    <div
+      class="absolute inset-0 opacity-10"
+      style="background-image: url('/tech-dark.jpg'); background-size: cover; background-position: center;"
+    >
+    </div>
+    <div class="absolute inset-0 bg-slate-900/85"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 sm:px-8">
+      <div class="text-center mb-20">
+        <p class="text-sm font-semibold tracking-widest text-blue-400 uppercase mb-3">Why Choose Quaitrix</p>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
+          Zero upfront risk, total transparency
+        </h2>
+        <p class="mt-5 text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          We believe in earning your trust through results, not promises.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="p-8 rounded-2xl bg-slate-800/50 border border-slate-700/50 backdrop-blur-sm">
+          <div class="w-12 h-12 rounded-lg bg-green-500/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+              ></path></svg
+            >
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Zero Upfront Risk</h3>
+          <p class="text-slate-400 leading-relaxed text-sm">
+            Get a working demo before paying a single cent. You see exactly what you're investing in.
+          </p>
+        </div>
+
+        <div class="p-8 rounded-2xl bg-slate-800/50 border border-slate-700/50 backdrop-blur-sm">
+          <div class="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"
+              ></path></svg
+            >
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">15-Minute Turnaround</h3>
+          <p class="text-slate-400 leading-relaxed text-sm">
+            Our AI-assisted workflow generates your personalized demo in minutes, not days or weeks.
+          </p>
+        </div>
+
+        <div class="p-8 rounded-2xl bg-slate-800/50 border border-slate-700/50 backdrop-blur-sm">
+          <div class="w-12 h-12 rounded-lg bg-violet-500/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path></svg
+            >
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Transparent Pricing</h3>
+          <p class="text-slate-400 leading-relaxed text-sm">
+            Clear, upfront pricing tiers. No hidden fees, no surprise invoices. You know the cost before we start.
+          </p>
+        </div>
+
+        <div class="p-8 rounded-2xl bg-slate-800/50 border border-slate-700/50 backdrop-blur-sm">
+          <div class="w-12 h-12 rounded-lg bg-amber-500/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+              ></path></svg
+            >
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Dedicated Expert Team</h3>
+          <p class="text-slate-400 leading-relaxed text-sm">
+            Senior developers and designers only — no juniors, no outsourcing. Direct communication with your team.
+          </p>
+        </div>
+
+        <div class="p-8 rounded-2xl bg-slate-800/50 border border-slate-700/50 backdrop-blur-sm">
+          <div class="w-12 h-12 rounded-lg bg-rose-500/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+              ></path></svg
+            >
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">3 Free Revisions</h3>
+          <p class="text-slate-400 leading-relaxed text-sm">
+            Not perfect yet? We refine your project up to three times at no extra cost. Your satisfaction is guaranteed.
+          </p>
+        </div>
+
+        <div class="p-8 rounded-2xl bg-slate-800/50 border border-slate-700/50 backdrop-blur-sm">
+          <div class="w-12 h-12 rounded-lg bg-cyan-500/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
+              ></path></svg
+            >
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Post-Launch Support</h3>
+          <p class="text-slate-400 leading-relaxed text-sm">
+            We don't disappear after delivery. Ongoing maintenance, updates, and optimization — always included.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- PRICING TIERS -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="relative py-24 sm:py-32 bg-slate-50 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+      <div class="text-center mb-20">
+        <p class="text-sm font-semibold tracking-widest text-blue-600 uppercase mb-3">Pricing</p>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900">
+          Simple, transparent pricing
+        </h2>
+        <p class="mt-5 text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          No hidden fees. No surprises. Choose the tier that fits your needs.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <!-- Basic -->
+        <div class="w-full bg-white rounded-2xl shadow-sm p-8 border border-gray-200 flex flex-col">
+          <h3 class="text-xl font-bold text-gray-900">Basic Website</h3>
+          <div class="mt-4 flex items-baseline">
+            <span class="text-4xl font-extrabold text-gray-900">$1,500</span>
+          </div>
+          <p class="mt-2 text-sm text-gray-500">3–7 days delivery</p>
+          <ul class="mt-6 space-y-3 flex-1">
+            <li class="flex items-start gap-3 text-sm text-gray-600">
+              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
+              >
+              1–5 page responsive website
+            </li>
+            <li class="flex items-start gap-3 text-sm text-gray-600">
+              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
+              >
+              Mobile-first design
+            </li>
+            <li class="flex items-start gap-3 text-sm text-gray-600">
+              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
+              >
+              SEO optimization
+            </li>
+            <li class="flex items-start gap-3 text-sm text-gray-600">
+              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
+              >
+              Contact form with validation
+            </li>
+            <li class="flex items-start gap-3 text-sm text-gray-600">
+              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
+              >
+              Core Web Vitals optimized
+            </li>
+          </ul>
+          <a
+            href="/start-project"
+            class="mt-8 block text-center px-6 py-3 rounded-xl border-2 border-blue-600 text-blue-600 font-semibold hover:bg-blue-50 transition-colors"
+          >
+            Get Started
+          </a>
+        </div>
+
+        <!-- Standard (highlighted) -->
+        <div class="w-full bg-white rounded-2xl shadow-xl p-8 border-2 border-blue-600 flex flex-col relative">
+          <div
+            class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-blue-600 text-white text-xs font-bold rounded-full uppercase tracking-wide"
+          >
+            Most Popular
+          </div>
+          <h3 class="text-xl font-bold text-gray-900">Standard Website</h3>
+          <div class="mt-4 flex items-baseline">
+            <span class="text-4xl font-extrabold text-gray-900">$5,000</span>
+          </div>
+          <p class="mt-2 text-sm text-gray-500">1–3 weeks delivery</p>
+          <ul class="mt-6 space-y-3 flex-1">
+            <li class="flex items-start gap-3 text-sm text-gray-600">
+              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
+              >
+              Everything in Basic, plus:
+            </li>
+            <li class="flex items-start gap-3 text-sm text-gray-600">
+              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
+              >
+              Custom design &amp; branding
+            </li>
+            <li class="flex items-start gap-3 text-sm text-gray-600">
+              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
+              >
+              CMS integration
+            </li>
+            <li class="flex items-start gap-3 text-sm text-gray-600">
+              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
+              >
+              Scroll-driven animations
+            </li>
+            <li class="flex items-start gap-3 text-sm text-gray-600">
+              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
+              >
+              Analytics setup
+            </li>
+            <li class="flex items-start gap-3 text-sm text-gray-600">
+              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
+              >
+              Chatbot / AI assistant
+            </li>
+          </ul>
+          <a
+            href="/start-project"
+            class="mt-8 block text-center px-6 py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors"
+          >
+            Get Started
+          </a>
+        </div>
+
+        <!-- Premium -->
+        <div class="w-full bg-white rounded-2xl shadow-sm p-8 border border-gray-200 flex flex-col">
+          <h3 class="text-xl font-bold text-gray-900">Premium Full-Stack</h3>
+          <div class="mt-4 flex items-baseline">
+            <span class="text-4xl font-extrabold text-gray-900">$15,000+</span>
+          </div>
+          <p class="mt-2 text-sm text-gray-500">3–8 weeks delivery</p>
+          <ul class="mt-6 space-y-3 flex-1">
+            <li class="flex items-start gap-3 text-sm text-gray-600">
+              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
+              >
+              Everything in Standard, plus:
+            </li>
+            <li class="flex items-start gap-3 text-sm text-gray-600">
+              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
+              >
+              Full-stack application
+            </li>
+            <li class="flex items-start gap-3 text-sm text-gray-600">
+              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
+              >
+              Database &amp; authentication
+            </li>
+            <li class="flex items-start gap-3 text-sm text-gray-600">
+              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
+              >
+              E-commerce / payments
+            </li>
+            <li class="flex items-start gap-3 text-sm text-gray-600">
+              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
+              >
+              CI/CD pipeline &amp; DevOps
+            </li>
+            <li class="flex items-start gap-3 text-sm text-gray-600">
+              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
+              >
+              Ongoing maintenance &amp; support
+            </li>
+          </ul>
+          <a
+            href="/start-project"
+            class="mt-8 block text-center px-6 py-3 rounded-xl border-2 border-blue-600 text-blue-600 font-semibold hover:bg-blue-50 transition-colors"
+          >
+            Get Started
+          </a>
+        </div>
+      </div>
+
+      <!-- Add-ons -->
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-16">
+        <div class="p-8 rounded-2xl border border-gray-200 bg-white shadow-sm flex flex-col h-full">
+          <h3 class="text-xl font-bold text-gray-900">Android App Packaging</h3>
+          <div class="mt-2 text-2xl font-extrabold text-blue-600">+$3,000</div>
+          <p class="mt-4 text-gray-600 leading-relaxed flex-1">
+            Convert your website into a native Android app. Play Store submission ready, offline support, push
+            notifications.
+          </p>
+        </div>
+        <div class="p-8 rounded-2xl border border-gray-200 bg-white shadow-sm flex flex-col h-full">
+          <h3 class="text-xl font-bold text-gray-900">Custom Integrations</h3>
+          <div class="mt-2 text-2xl font-extrabold text-blue-600">+$2,000</div>
+          <p class="mt-4 text-gray-600 leading-relaxed flex-1">
+            Third-party API integrations, payment gateways, CRM connections, custom automation workflows.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- CTA -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="relative py-24 sm:py-32 bg-gradient-to-br from-blue-600 via-indigo-600 to-violet-700 overflow-hidden">
+    <div
+      class="absolute inset-0 opacity-10"
+      style="background-image: url('/tech-dark.jpg'); background-size: cover; background-position: center;"
+    >
+    </div>
+    <div class="relative z-10 max-w-4xl mx-auto px-6 sm:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
+        Ready to see what your project looks like?
+      </h2>
+      <p class="mt-6 text-lg text-blue-100 leading-relaxed max-w-2xl mx-auto">
+        Start with a free demo. No commitment, no credit card. Just a personalized preview of your future project.
+      </p>
+      <a
+        href="/start-project"
+        class="mt-10 inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl bg-white text-blue-600 hover:bg-blue-50 transition-all shadow-xl hover:scale-[1.02]"
       >
-      <span class="block mb-1 sm:hidden font-bold text-blue-600">AstroWind: Production-ready.</span>
-      Suitable for Startups, Small Business, SaaS websites, Professional Portfolios, Marketing websites, Landing Pages & Blogs.
-    </Fragment>
-  </Hero>
-
-  <!-- Note Widget ******************* -->
-
-  <Note title="Philosophy:" description="Simplicity, Best Practices and High Performance" />
-
-  <!-- Features Widget *************** -->
-
-  <Features
-    id="features"
-    tagline="Features"
-    title="What you get with AstroWind"
-    subtitle="One of the most professional and comprehensive templates currently on the market. Most starred & forked Astro theme in 2022, 2023, 2024 and 2025."
-    items={[
-      {
-        title: 'Astro + Tailwind CSS Integration',
-        description:
-          'A seamless integration between two great frameworks that offer high productivity, performance and versatility. Now powered by Tailwind CSS v4.',
-        icon: 'tabler:brand-tailwind',
-      },
-      {
-        title: 'Ready-to-use Components',
-        description:
-          'Widgets made with Tailwind CSS v4 ready to be used in Marketing Websites, SaaS, Blogs, Personal Profiles, Small Business...',
-        icon: 'tabler:components',
-      },
-      {
-        title: 'Best Practices',
-        description:
-          'Creating secure, efficient, and user-friendly websites that deliver exceptional experiences and lasting value.',
-        icon: 'tabler:list-check',
-      },
-      {
-        title: 'Excellent Page Speed',
-        description:
-          'Having a good page speed impacts organic search ranking, improves user experience (UI/UX) and increase conversion rates.',
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'Search Engine Optimization (SEO)',
-        description:
-          "SEO lies in its ability to enhance a website's visibility, driving organic traffic and enabling it to reach a wider audience.",
-        icon: 'tabler:arrows-right-left',
-      },
-      {
-        title: 'Open to new ideas and contributions',
-        description:
-          'Embracing a culture that is open to new ideas and contributions is integral fostering innovation, collaboration, and a dynamic user experience.',
-        icon: 'tabler:bulb',
-      },
-    ]}
-  />
-
-  <!-- Content Widget **************** -->
-
-  <Content
-    isReversed
-    tagline="Inside template"
-    title="AstroWind's Blueprint: Fun Meets Functionality!"
-    items={[
-      {
-        title: 'Built on top of Astro v6',
-        description:
-          'Benefiting from the performance and developer-friendly features of this modern static site generator.',
-      },
-      {
-        title: 'Styled using Tailwind CSS v4',
-        description:
-          'Facilitating rapid design and consistent styling with this highly popular utility-first CSS framework.',
-      },
-      {
-        title: 'Cross-browser compatibility',
-        description:
-          'Ensure your website looks and functions consistently across various web browsers, delivering a seamless experience to all users.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Colorful Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Building on modern foundations</h3>
-      Gain a competitive advantage by incorporating industry leading practices
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <!-- Content Widget **************** -->
-
-  <Content
-    isAfterContent
-    items={[
-      {
-        title: 'High level of customization',
-        description: `Tailor the template effortlessly to match your brand's identity and requirements, making your website distinct and saving you time.`,
-      },
-      {
-        title: 'Multiple layout possibilities',
-        description:
-          'Explore various layout options to find the structure that best presents your content, enhancing user engagement and navigation.',
-      },
-      {
-        title: 'Fully responsive design',
-        description:
-          "Ensure your website's optimal performance on various devices and screen sizes, providing a consistent and enjoyable user experience.",
-      },
-      {
-        title: 'Integration of media',
-        description:
-          'Seamlessly incorporate images, videos, and multimedia elements that enhance your content and engage visitors effectively.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2194&q=80',
-      alt: 'Blueprint Image',
-    }}
-  >
-    <Fragment slot="content">Ensure your online presence truly represents you.</Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <!-- Content Widget **************** -->
-
-  <Content
-    isReversed
-    isAfterContent
-    items={[
-      {
-        title: 'Enhanced user engagement',
-        description:
-          'Captivate your audience with interactive elements, intuitive navigation, and visually appealing layouts, encouraging longer visits.',
-      },
-      {
-        title: 'Continuous improvement',
-        description:
-          'Ensure your website stays aligned with the latest trends and technologies through regular updates and enhancements.',
-      },
-      {
-        title: 'Time and resource efficiency',
-        description:
-          'Skip the time-consuming process of building a website from scratch and launch your online presence sooner with AstroWind.',
-      },
-      {
-        title: 'Community support',
-        description: `Join the growing AstroWind community for insights, resources, and assistance, ensuring you're never alone on your web development journey.`,
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1611462985358-60d3498e0364?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Astronauts Image',
-    }}
-  >
-    <Fragment slot="content">Designed to foster growth and success.</Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <!-- Steps Widget ****************** -->
-
-  <Steps
-    title="Get your dream website up and running in no time with AstroWind."
-    items={[
-      {
-        title: 'Step 1: <span class="font-medium">Download</span>',
-        description:
-          "Kickstart with GitHub! Either fork the AstroWind template or simply click 'Use this template'. Your canvas awaits, ready for your digital masterpiece. In just a few clicks, you've already set the foundation.",
-        icon: 'tabler:package',
-      },
-      {
-        title: 'Step 2: <span class="font-medium">Add content</span>',
-        description:
-          "Pour your vision into it. Add images, text, and all that jazz to breathe life into your digital space. Remember, it's the content that tells your story, so make it captivating.",
-        icon: 'tabler:letter-case',
-      },
-      {
-        title: 'Step 3: <span class="font-medium">Customize styles</span>',
-        description:
-          'Give it your personal touch. Tailor colors, fonts, and layouts until it feels just right. Your unique flair, amplified by AstroWind! Precision in design ensures a seamless user experience.',
-        icon: 'tabler:paint',
-      },
-      {
-        title: 'Ready!',
-        icon: 'tabler:check',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1616198814651-e71f960c3180?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-      alt: 'Steps image',
-    }}
-  />
-
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Most used widgets"
-    subtitle="Provides frequently used components for building websites using Tailwind CSS v4"
-    tagline="Components"
-    items={[
-      {
-        title: 'Headers',
-        description: "Ever tried driving without GPS? Boom! That's why websites need headers for direction.",
-        icon: 'flat-color-icons:template',
-      },
-      {
-        title: 'Heros',
-        description:
-          "Picture a superhero landing – epic, right? That's the job of a Hero section, making grand entrances!",
-        icon: 'flat-color-icons:gallery',
-      },
-      {
-        title: 'Features',
-        description:
-          'Where websites strut their stuff and show off superpowers. No holding back on the bragging rights here!',
-        icon: 'flat-color-icons:approval',
-      },
-      {
-        title: 'Content',
-        description:
-          "Dive into the meat and potatoes of a site; without it, you'd just be window shopping. Content is king.",
-        icon: 'flat-color-icons:document',
-      },
-      {
-        title: 'Call-to-Action',
-        description:
-          'That enthusiastic friend who\'s always urging, "Do it! Do it!"? Yeah, that\'s this button nudging you towards adventure.',
-        icon: 'flat-color-icons:advertising',
-      },
-      {
-        title: 'Pricing',
-        description: 'Behold the dessert menu of the website world. Tempting choices await, can you resist?',
-        icon: 'flat-color-icons:currency-exchange',
-      },
-      {
-        title: 'Testimonial',
-        description: 'Step into the gossip corner! Here, other visitors spill the beans and share the juicy details.',
-        icon: 'flat-color-icons:voice-presentation',
-      },
-      {
-        title: 'Contact',
-        description:
-          'Like a digital mailbox, but faster! Drop a line, ask a question, or send a virtual high-five. Ding! Message in.',
-        icon: 'flat-color-icons:business-contact',
-      },
-      {
-        title: 'Footers',
-        description: "The footer's like the credits of a movie but sprinkled with easter eggs. Time to hunt!",
-        icon: 'flat-color-icons:database',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Features2>
-
-  <!-- HighlightedPosts Widget ******* -->
-
-  <BlogLatestPosts
-    title="Find out more content in our Blog"
-    information={`The blog is used to display AstroWind documentation.
-                        Each new article will be an important step that you will need to know to be an expert in creating a website using Astro v6 + Tailwind CSS v4.
-                        Astro is a very interesting technology. Thanks.
-                `}
-  />
-
-  <!-- FAQs Widget ******************* -->
-
-  <FAQs
-    title="Frequently Asked Questions"
-    subtitle="Dive into the following questions to gain insights into the powerful features that AstroWind offers and how it can elevate your web development journey."
-    tagline="FAQs"
-    classes={{ container: 'max-w-6xl' }}
-    items={[
-      {
-        title: 'Why AstroWind?',
-        description:
-          "Michael Knight a young loner on a crusade to champion the cause of the innocent. The helpless. The powerless in a world of criminals who operate above the law. Here he comes Here comes Speed Racer. He's a demon on wheels.",
-      },
-      {
-        title: 'What do I need to start?',
-        description:
-          'Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds. Many say exploration is part of our destiny, but it’s actually our duty to future generations.',
-      },
-      {
-        title: 'How to install the Astro + Tailwind CSS template?',
-        description:
-          "Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows.",
-      },
-      {
-        title: "What's something that you don't understand?",
-        description:
-          "A flower in my garden, a mystery in my panties. Heart attack never stopped old Big Bear. I didn't even know we were calling him Big Bear.",
-      },
-      {
-        title: 'What is something that you would like to try again?',
-        description:
-          "A business big enough that it could be listed on the NASDAQ goes belly up. Disappears! It ceases to exist without me. No, you clearly don't know who you're talking to, so let me clue you in.",
-      },
-      {
-        title: 'If you could only ask one question to each person you meet, what would that question be?',
-        description:
-          "This is not about revenge. This is about justice. A lot of things can change in twelve years, Admiral. Well, that's certainly good to know. About four years. I got tired of hearing how young I looked.",
-      },
-    ]}
-  />
-
-  <!-- Stats Widget ****************** -->
-
-  <Stats
-    stats={[
-      { title: 'Downloads', amount: '132K' },
-      { title: 'Stars', amount: '24.8K' },
-      { title: 'Forks', amount: '10.3K' },
-      { title: 'Users', amount: '48.4K' },
-    ]}
-  />
-
-  <!-- CallToAction Widget *********** -->
-
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
-        target: '_blank',
-        icon: 'tabler:download',
-      },
-    ]}
-  >
-    <Fragment slot="title">
-      Astro&nbsp;+&nbsp;<br class="block sm:hidden" /><span class="sm:whitespace-nowrap">Tailwind CSS</span>
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      Be very surprised by these huge fake numbers you are seeing on this page. <br class="hidden md:inline" />Don't
-      waste more time! :P
-    </Fragment>
-  </CallToAction>
+        Start Your Free Demo
+        <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"
+          ></path></svg
+        >
+      </a>
+    </div>
+  </section>
 </Layout>

@@ -1,0 +1,22 @@
+---
+// editor/[token].astro — Demo editor with split-pane interface (client-side fetch)
+// The editor is inherently interactive — JSON is fetched client-side
+import EditorLayout from '~/layouts/EditorLayout.astro';
+import EditorPanel from '~/components/editor/EditorPanel.jsx';
+import EditorPreview from '~/components/editor/EditorPreview.jsx';
+
+export async function getStaticPaths() {
+  return [{ params: { token: 'test-prototype' } }];
+}
+
+const { token } = Astro.params;
+---
+
+<EditorLayout title="Demo Editor — Quaitrix">
+  <Fragment slot="panel">
+    <EditorPanel client:load="react" token={token} />
+  </Fragment>
+  <Fragment slot="preview">
+    <EditorPreview client:load="react" token={token} />
+  </Fragment>
+</EditorLayout>

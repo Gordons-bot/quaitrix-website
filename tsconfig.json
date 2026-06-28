@@ -9,5 +9,14 @@
     }
   },
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist/"]
+  "exclude": [
+    "dist/",
+    "src/pages/start-project.astro",
+    "src/pages/check-demo.astro",
+    "src/pages/demo/[token].astro",
+    "src/pages/editor/[token].astro",
+    "src/layouts/DemoLayout.astro",
+    "src/components/prototype/Contact.jsx",
+    "src/navigation.ts"
+  ]
 }

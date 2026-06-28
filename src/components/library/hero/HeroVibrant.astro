@@ -1,0 +1,35 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  ctaText?: string;
+  ctaHref?: string;
+}
+const {
+  title = 'Stand out from the crowd',
+  description = 'Bold visuals and energetic design that turns visitors into customers.',
+  ctaText = 'Launch something amazing',
+  ctaHref = '#contact',
+} = Astro.props;
+---
+
+<section class="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
+  <div class="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <h1 class="text-4xl font-bold tracking-wide text-white sm:text-5xl">
+        {title}
+      </h1>
+      <p class="mt-6 text-lg leading-8 text-white/90">
+        {description}
+      </p>
+      <div class="mt-10 flex items-center justify-center gap-x-6">
+        <a
+          href={ctaHref}
+          class="rounded-full bg-pink-500 px-6 py-3 text-sm font-bold text-white shadow-xl hover:bg-pink-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-500"
+        >
+          {ctaText}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
