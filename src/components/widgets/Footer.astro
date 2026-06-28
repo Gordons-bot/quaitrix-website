@@ -25,7 +25,13 @@ interface Props {
   contactEmail?: string;
 }
 
-const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme = 'light', companyDescription = '', contactEmail = '' } = Astro.props;
+const {
+  socialLinks = [],
+  links = [],
+  footNote = '',
+  companyDescription = '',
+  contactEmail = 'manager@quaitrix.com',
+} = Astro.props;
 const mailtoHref = 'mailto:' + contactEmail;
 ---
 

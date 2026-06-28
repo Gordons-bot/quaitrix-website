@@ -83,7 +83,10 @@ const columnsClass =
                       )}
                       {description && (
                         <p
-                          class:list={[{ 'mt-3': itemTitle }, 'text-gray-600 dark:text-slate-400 ml-2 rtl:ml-0 rtl:mr-2']}
+                          class:list={[
+                            { 'mt-3': itemTitle },
+                            'text-gray-600 dark:text-slate-400 ml-2 rtl:ml-0 rtl:mr-2',
+                          ]}
                           set:html={description}
                         />
                       )}

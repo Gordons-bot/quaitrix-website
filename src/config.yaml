@@ -11,7 +11,7 @@ metadata:
   title:
     default: Quaitrix
     template: '%s — Quaitrix'
-  description: "Quaitrix builds custom websites and Android apps for small businesses and startups."
+  description: 'Quaitrix builds custom websites and Android apps for small businesses and startups.'
   robots:
     index: true
     follow: true

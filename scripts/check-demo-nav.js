@@ -8,7 +8,7 @@ const DEMO_PAGE = './dist/demo/test-prototype/index.html';
 let html;
 try {
   html = readFileSync(DEMO_PAGE, 'utf8');
-} catch (e) {
+} catch {
   console.error(`FAIL: Cannot read ${DEMO_PAGE} — run 'npm run build' first`);
   process.exit(1);
 }

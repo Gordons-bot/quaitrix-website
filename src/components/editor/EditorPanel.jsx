@@ -9,10 +9,16 @@ function TextEditor({ field, value, onChange }) {
   return (
     <div className="mb-3">
       <label className="block text-xs font-semibold text-gray-700 mb-1">{label}</label>
-      <input type="text" value={value || ''} onChange={(e) => onChange(e.target.value)}
+      <input
+        type="text"
+        value={value || ''}
+        onChange={(e) => onChange(e.target.value)}
         className={`w-full px-3 py-2 border ${isValid ? 'border-gray-300' : 'border-red-400'} rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none`}
-        maxLength={max} />
-      <div className={`text-xs mt-1 ${isValid ? 'text-gray-400' : 'text-red-500'}`}>{len}/{max}</div>
+        maxLength={max}
+      />
+      <div className={`text-xs mt-1 ${isValid ? 'text-gray-400' : 'text-red-500'}`}>
+        {len}/{max}
+      </div>
     </div>
   );
 }
@@ -22,9 +28,16 @@ function SelectEditor({ field, value, onChange }) {
   return (
     <div className="mb-3">
       <label className="block text-xs font-semibold text-gray-700 mb-1">{label}</label>
-      <select value={value || ''} onChange={(e) => onChange(e.target.value)}
-        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-blue-500 outline-none">
-        {options.map(o => <option key={o} value={o}>{o}</option>)}
+      <select
+        value={value || ''}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-blue-500 outline-none"
+      >
+        {options.map((o) => (
+          <option key={o} value={o}>
+            {o}
+          </option>
+        ))}
       </select>
     </div>
   );
@@ -36,13 +49,16 @@ function ColorPicker({ field, value, onChange }) {
     <div className="mb-3">
       <label className="block text-xs font-semibold text-gray-700 mb-2">{label}</label>
       <div className="flex gap-2 flex-wrap">
-        {options.map(opt => {
+        {options.map((opt) => {
           const c = paletteColors[opt];
           if (!c) return null;
           return (
-            <button key={opt} onClick={() => onChange(opt)}
+            <button
+              key={opt}
+              onClick={() => onChange(opt)}
               className={`w-8 h-8 ${c.bg} rounded-full border-2 ${value === opt ? 'border-gray-900 scale-110' : 'border-gray-300'} transition-all`}
-              title={opt} />
+              title={opt}
+            />
           );
         })}
       </div>
@@ -54,11 +70,20 @@ function ImagePicker({ field, value, onChange }) {
   return (
     <div className="mb-3">
       <label className="block text-xs font-semibold text-gray-700 mb-1">{field.label}</label>
-      {value?.id && <img src={`https://images.unsplash.com/${value.id}?w=300&h=150&fit=crop`}
-        alt="" className="w-full h-16 object-cover rounded-lg mb-2" />}
-      <input type="text" value={value?.id || ''} placeholder="Unsplash photo ID (e.g. photo-155...)"
+      {value?.id && (
+        <img
+          src={`https://images.unsplash.com/${value.id}?w=300&h=150&fit=crop`}
+          alt=""
+          className="w-full h-16 object-cover rounded-lg mb-2"
+        />
+      )}
+      <input
+        type="text"
+        value={value?.id || ''}
+        placeholder="Unsplash photo ID (e.g. photo-155...)"
         onChange={(e) => onChange({ ...(value || {}), id: e.target.value })}
-        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" />
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+      />
     </div>
   );
 }
@@ -81,30 +106,39 @@ const FALLBACK_JSON = {
   theme: { palette: 'indigo', accent: 'amber', headingFont: 'sora', bodyFont: 'inter', radius: 'md' },
   sections: [
     {
-      id: 'sec_hero', type: 'hero', visible: true, variant: 'centered',
+      id: 'sec_hero',
+      type: 'hero',
+      visible: true,
+      variant: 'centered',
       props: {
         headline: { text: 'Your Website. Built Before You Pay.' },
         subhead: { text: 'Preview your custom demo — no commitment required.' },
         ctaPrimary: { text: 'Get Started', action: 'scrollTo:contact' },
-        ctaSecondary: { text: 'Learn More', action: 'scrollTo:features' }
-      }
+        ctaSecondary: { text: 'Learn More', action: 'scrollTo:features' },
+      },
     },
     {
-      id: 'sec_features', type: 'feature-grid', visible: true, variant: 'three-col',
+      id: 'sec_features',
+      type: 'feature-grid',
+      visible: true,
+      variant: 'three-col',
       props: {
         heading: { text: 'Why Quaitrix' },
         items: [
           { title: { text: 'Fast' }, body: { text: 'Demos delivered in minutes.' }, icon: 'bolt' },
           { title: { text: 'Affordable' }, body: { text: 'Transparent pricing, no surprises.' }, icon: 'dollar' },
-          { title: { text: 'Professional' }, body: { text: 'Pixel-perfect, production-ready code.' }, icon: 'star' }
-        ]
-      }
+          { title: { text: 'Professional' }, body: { text: 'Pixel-perfect, production-ready code.' }, icon: 'star' },
+        ],
+      },
     },
     {
-      id: 'sec_contact', type: 'contact', visible: true, variant: 'standard',
-      props: { heading: { text: 'Get In Touch' }, subhead: { text: 'Ready to start? Send us a message.' } }
-    }
-  ]
+      id: 'sec_contact',
+      type: 'contact',
+      visible: true,
+      variant: 'standard',
+      props: { heading: { text: 'Get In Touch' }, subhead: { text: 'Ready to start? Send us a message.' } },
+    },
+  ],
 };
 
 // ── Main Editor Panel ──
@@ -118,13 +152,18 @@ export default function EditorPanel({ json: providedJson, token }) {
   useEffect(() => {
     if (providedJson || !token) return;
     fetch(`/demo/${token}/prototype.json`)
-      .then(r => { if (!r.ok) throw new Error('not found'); return r.json(); })
-      .then(data => { if (data && data.sections) setCurrentJson(data); })
+      .then((r) => {
+        if (!r.ok) throw new Error('not found');
+        return r.json();
+      })
+      .then((data) => {
+        if (data && data.sections) setCurrentJson(data);
+      })
       .catch(() => {});
   }, [token, providedJson]);
 
   const updateSectionProp = (sectionIdx, propPath, value) => {
-    setCurrentJson(prev => {
+    setCurrentJson((prev) => {
       const newSections = prev.sections.map((s, i) => {
         if (i !== sectionIdx) return s;
         const newProps = setNestedPath(s.props || {}, propPath, value);
@@ -135,13 +174,13 @@ export default function EditorPanel({ json: providedJson, token }) {
   };
 
   const updateTheme = (key, value) => {
-    setCurrentJson(prev => ({ ...prev, theme: { ...(prev.theme || {}), [key]: value } }));
+    setCurrentJson((prev) => ({ ...prev, theme: { ...(prev.theme || {}), [key]: value } }));
   };
 
   const toggleSection = (idx) => {
-    setCurrentJson(prev => ({
+    setCurrentJson((prev) => ({
       ...prev,
-      sections: prev.sections.map((s, i) => i === idx ? { ...s, visible: !(s.visible !== false) } : s)
+      sections: prev.sections.map((s, i) => (i === idx ? { ...s, visible: !(s.visible !== false) } : s)),
     }));
   };
 
@@ -153,7 +192,7 @@ export default function EditorPanel({ json: providedJson, token }) {
       const res = await fetch(`/api/prototype/${token}/edit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(currentJson)
+        body: JSON.stringify(currentJson),
       });
       const data = await res.json();
       if (res.ok) {
@@ -163,35 +202,29 @@ export default function EditorPanel({ json: providedJson, token }) {
         if (data.details) setValidationErrors(data.details);
         setError(data.error || 'Save failed');
       }
-    } catch (e) {
+    } catch {
       setError('Connection error. Please try again.');
     }
     setSaving(false);
   };
 
-  const approve = async () => {
+  const handleApprove = async () => {
     setSaving(true);
     setError(null);
-    setValidationErrors([]);
     try {
-      const res = await fetch(`/api/prototype/${token}/approve`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ json: currentJson })
-      });
+      const res = await fetch(`/api/prototype/${token}/approve`, { method: 'POST' });
       const data = await res.json();
-      if (res.ok) {
-        // Show success with link to updated demo
-        setSaved(true);
-        if (data.demo_url) {
-          setTimeout(() => window.open(data.demo_url, '_blank'), 500);
-        }
-        setTimeout(() => setSaved(false), 3000);
-      } else {
-        if (data.details) setValidationErrors(data.details);
+      if (!res.ok) {
         setError(data.error || 'Approve failed');
+        return;
       }
-    } catch (e) {
+      // Show success with link to updated demo
+      setSaved(true);
+      if (data.demo_url) {
+        setTimeout(() => window.open(data.demo_url, '_blank'), 500);
+      }
+      setTimeout(() => setSaved(false), 3000);
+    } catch {
       setError('Connection error. Please try again.');
     }
     setSaving(false);
@@ -203,18 +236,33 @@ export default function EditorPanel({ json: providedJson, token }) {
     let value = section?.props;
     for (const k of keys) value = value?.[k];
 
-    if (def.kind === 'text') return (
-      <TextEditor key={fieldKey} field={def} value={value}
-        onChange={(v) => updateSectionProp(sectionIdx, fieldKey, v)} />
-    );
-    if (def.kind === 'select') return (
-      <SelectEditor key={fieldKey} field={def} value={value}
-        onChange={(v) => updateSectionProp(sectionIdx, fieldKey, v)} />
-    );
-    if (def.kind === 'unsplash') return (
-      <ImagePicker key={fieldKey} field={def} value={value}
-        onChange={(v) => updateSectionProp(sectionIdx, fieldKey, v)} />
-    );
+    if (def.kind === 'text')
+      return (
+        <TextEditor
+          key={fieldKey}
+          field={def}
+          value={value}
+          onChange={(v) => updateSectionProp(sectionIdx, fieldKey, v)}
+        />
+      );
+    if (def.kind === 'select')
+      return (
+        <SelectEditor
+          key={fieldKey}
+          field={def}
+          value={value}
+          onChange={(v) => updateSectionProp(sectionIdx, fieldKey, v)}
+        />
+      );
+    if (def.kind === 'unsplash')
+      return (
+        <ImagePicker
+          key={fieldKey}
+          field={def}
+          value={value}
+          onChange={(v) => updateSectionProp(sectionIdx, fieldKey, v)}
+        />
+      );
     return null;
   };
 
@@ -228,7 +276,9 @@ export default function EditorPanel({ json: providedJson, token }) {
           <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
             <p className="text-xs font-semibold text-red-700 mb-1">{error}</p>
             {validationErrors.map((err, i) => (
-              <p key={i} className="text-xs text-red-600">{err}</p>
+              <p key={i} className="text-xs text-red-600">
+                {err}
+              </p>
             ))}
           </div>
         )}
@@ -243,8 +293,23 @@ export default function EditorPanel({ json: providedJson, token }) {
         <div className="mb-5 p-3 bg-white rounded-xl border border-gray-200">
           <h3 className="text-xs font-bold text-gray-500 uppercase mb-2">Theme</h3>
           {Object.entries(themeManifest).map(([key, def]) => {
-            if (def.options?.[0] in paletteColors) return <ColorPicker key={key} field={def} value={currentJson.theme?.[key]} onChange={(v) => updateTheme(key, v)} />;
-            return <SelectEditor key={key} field={def} value={currentJson.theme?.[key]} onChange={(v) => updateTheme(key, v)} />;
+            if (def.options?.[0] in paletteColors)
+              return (
+                <ColorPicker
+                  key={key}
+                  field={def}
+                  value={currentJson.theme?.[key]}
+                  onChange={(v) => updateTheme(key, v)}
+                />
+              );
+            return (
+              <SelectEditor
+                key={key}
+                field={def}
+                value={currentJson.theme?.[key]}
+                onChange={(v) => updateTheme(key, v)}
+              />
+            );
           })}
         </div>
 
@@ -255,8 +320,12 @@ export default function EditorPanel({ json: providedJson, token }) {
             const m = manifests[section.type];
             return (
               <label key={section.id} className="flex items-center gap-2 py-1 cursor-pointer">
-                <input type="checkbox" checked={section.visible !== false} onChange={() => toggleSection(idx)}
-                  className="w-4 h-4 rounded border-gray-300 text-blue-600" />
+                <input
+                  type="checkbox"
+                  checked={section.visible !== false}
+                  onChange={() => toggleSection(idx)}
+                  className="w-4 h-4 rounded border-gray-300 text-blue-600"
+                />
                 <span className="text-sm text-gray-700">{m?.label || section.type}</span>
               </label>
             );
@@ -270,9 +339,9 @@ export default function EditorPanel({ json: providedJson, token }) {
           return (
             <div key={section.id} className="mb-4 p-3 bg-white rounded-xl border border-gray-200">
               <h3 className="text-xs font-bold text-gray-500 uppercase mb-2">{m.label}</h3>
-              {Object.entries(m.fields).filter(([_, d]) => d.kind !== 'list').map(([key, def]) =>
-                renderField(key, def, sectionIdx)
-              )}
+              {Object.entries(m.fields)
+                .filter(([, d]) => d.kind !== 'list')
+                .map(([key, def]) => renderField(key, def, sectionIdx))}
             </div>
           );
         })}
@@ -280,12 +349,18 @@ export default function EditorPanel({ json: providedJson, token }) {
 
       {/* Action Buttons */}
       <div className="p-4 bg-white border-t border-gray-200 space-y-2">
-        <button onClick={saveEdit} disabled={saving}
-          className="w-full px-4 py-2 bg-gray-800 text-white text-sm font-medium rounded-lg hover:bg-gray-700 disabled:opacity-50">
+        <button
+          onClick={saveEdit}
+          disabled={saving}
+          className="w-full px-4 py-2 bg-gray-800 text-white text-sm font-medium rounded-lg hover:bg-gray-700 disabled:opacity-50"
+        >
           {saving ? 'Saving...' : saved ? 'Saved!' : 'Save Changes'}
         </button>
-        <button onClick={approve} disabled={saving}
-          className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 disabled:opacity-50">
+        <button
+          onClick={handleApprove}
+          disabled={saving}
+          className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 disabled:opacity-50"
+        >
           Approve & Rebuild Site
         </button>
       </div>

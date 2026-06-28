@@ -9,7 +9,7 @@ import Contact from './Contact';
 const componentMap = {
   hero: Hero,
   'feature-grid': FeatureGrid,
-  contact: Contact
+  contact: Contact,
 };
 
 export default function PrototypeRenderer({ json }) {
@@ -18,26 +18,31 @@ export default function PrototypeRenderer({ json }) {
   }
 
   const theme = json.theme || { palette: 'indigo', radius: 'md' };
-  const sectionsWithTheme = json.sections.map(s => ({ ...s, _theme: theme }));
+  const sectionsWithTheme = json.sections.map((s) => ({ ...s, _theme: theme }));
 
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className="bg-white border-b border-gray-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 py-4 flex items-center justify-between">
-          <div className="font-bold text-xl text-gray-900">
-            {json.meta?.businessName || 'Your Business'}
-          </div>
+          <div className="font-bold text-xl text-gray-900">{json.meta?.businessName || 'Your Business'}</div>
           <div className="hidden md:flex gap-8 text-sm text-gray-600">
-            {sectionsWithTheme.filter(s => s.visible !== false).map(s => (
-              <a key={s.id} href={`#${s.type === 'hero' ? 'home' : s.type === 'feature-grid' ? 'features' : 'contact'}`}
-                 className="hover:text-gray-900 transition-colors">
-                {s.type === 'hero' ? 'Home' : s.type === 'feature-grid' ? 'Features' : 'Contact'}
-              </a>
-            ))}
+            {sectionsWithTheme
+              .filter((s) => s.visible !== false)
+              .map((s) => (
+                <a
+                  key={s.id}
+                  href={`#${s.type === 'hero' ? 'home' : s.type === 'feature-grid' ? 'features' : 'contact'}`}
+                  className="hover:text-gray-900 transition-colors"
+                >
+                  {s.type === 'hero' ? 'Home' : s.type === 'feature-grid' ? 'Features' : 'Contact'}
+                </a>
+              ))}
           </div>
-          <a href="#contact"
-             className="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-semibold transition-colors">
+          <a
+            href="#contact"
+            className="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-semibold transition-colors"
+          >
             Get Started
           </a>
         </div>
@@ -55,7 +60,7 @@ export default function PrototypeRenderer({ json }) {
       <footer className="bg-gray-900 text-gray-400 py-12">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 text-center text-sm">
           <p>
-            &copy; {(new Date()).getFullYear()} {json.meta?.businessName || 'Your Business'}. Built by{' '}
+            &copy; {new Date().getFullYear()} {json.meta?.businessName || 'Your Business'}. Built by{' '}
             <span className="text-indigo-400 font-semibold">Quaitrix</span>.
           </p>
         </div>

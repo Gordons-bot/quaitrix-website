@@ -1,4 +1,4 @@
-import { getPermalink, getAsset } from './utils/permalinks';
+import { getPermalink } from './utils/permalinks';
 
 export const headerData = {
   links: [
@@ -44,10 +44,9 @@ export const footerData = {
     },
   ],
   secondaryLinks: [],
-  socialLinks: [
-    { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: '#' },
-  ],
-  companyDescription: 'Quaitrix is a professional digital agency. Our team of expert developers, designers, and project managers builds fast, beautiful websites and native Android apps for businesses.',
+  socialLinks: [{ ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: '#' }],
+  companyDescription:
+    'Quaitrix is a professional digital agency. Our team of expert developers, designers, and project managers builds fast, beautiful websites and native Android apps for businesses.',
   contactEmail: 'contact@quaitrix.com',
   footNote: `
     © <span class="font-semibold">Quaitrix</span>. All rights reserved.
