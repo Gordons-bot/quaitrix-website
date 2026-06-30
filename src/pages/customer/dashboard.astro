@@ -1,0 +1,177 @@
+---
+// /root/CompanyWebsite/src/pages/customer/dashboard.astro
+import Layout from '~/layouts/Layout.astro';
+
+// This page is rendered client-side — it fetches order data from the API
+// using the session cookie (qtsid) set during magic link verification.
+---
+
+<Layout title="Your Project Dashboard — Quaitrix">
+  <main class="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+      <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="/" class="font-bold text-xl text-gray-900 dark:text-white">Quaitrix</a>
+        <span class="text-sm text-gray-500 dark:text-gray-400">Customer Dashboard</span>
+      </div>
+    </header>
+
+    <!-- Loading State -->
+    <div id="dashboard-loading" class="max-w-4xl mx-auto px-6 py-16 text-center">
+      <div class="animate-pulse">
+        <div class="h-8 bg-gray-200 dark:bg-gray-700 rounded w-64 mx-auto mb-4"></div>
+        <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-96 mx-auto"></div>
+      </div>
+    </div>
+
+    <!-- Not Logged In State -->
+    <div id="dashboard-login" class="hidden max-w-md mx-auto px-6 py-16 text-center">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
+        <div class="text-4xl mb-4">🔒</div>
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Session Expired</h1>
+        <p class="text-gray-600 dark:text-gray-400 mb-6">Please log in again to access your dashboard.</p>
+        <a href="/customer/login" class="inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+          Log In
+        </a>
+      </div>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div id="dashboard-content" class="hidden max-w-4xl mx-auto px-6 py-8">
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Your Projects</h1>
+      <p class="text-gray-600 dark:text-gray-400 mb-8">Track the progress of your custom demo build.</p>
+
+      <div id="orders-list" class="space-y-4">
+        <!-- Orders rendered here -->
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Status display configuration
+    const STATUS_CONFIG = {
+      'intake': {
+        badge: 'In Review',
+        badgeColor: 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300',
+        message: 'A designer is reviewing your business now and building your demo.',
+        icon: '🎨'
+      },
+      'pending': {
+        badge: 'In Review',
+        badgeColor: 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300',
+        message: 'A designer is reviewing your business now and building your demo.',
+        icon: '🎨'
+      },
+      'building': {
+        badge: 'Building',
+        badgeColor: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300',
+        message: 'Your demo is being crafted with care. Almost ready!',
+        icon: '⚙️'
+      },
+      'ready': {
+        badge: 'Ready to Review',
+        badgeColor: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300',
+        message: 'Your demo is ready! Click below to view it.',
+        icon: '✅'
+      },
+      'approved': {
+        badge: 'Approved',
+        badgeColor: 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300',
+        message: 'You approved this demo. We\'ll begin development shortly.',
+        icon: '🎉'
+      },
+      'paid': {
+        badge: 'In Development',
+        badgeColor: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300',
+        message: 'Payment received. Development is underway!',
+        icon: '🚀'
+      },
+      'delivered': {
+        badge: 'Delivered',
+        badgeColor: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300',
+        message: 'Your project has been delivered. Check your email for details.',
+        icon: '📦'
+      }
+    };
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr);
+      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    async function loadDashboard() {
+      const loadingEl = document.getElementById('dashboard-loading');
+      const loginEl = document.getElementById('dashboard-login');
+      const contentEl = document.getElementById('dashboard-content');
+      const ordersList = document.getElementById('orders-list');
+
+      try {
+        const res = await fetch('/api/customer/dashboard', {
+          credentials: 'include',
+          headers: { 'Accept': 'application/json' }
+        });
+
+        // Not logged in → redirect
+        if (res.redirected || res.status === 404 || res.status === 302) {
+          loadingEl.classList.add('hidden');
+          loginEl.classList.remove('hidden');
+          return;
+        }
+
+        const data = await res.json();
+
+        if (!data.orders || data.orders.length === 0) {
+          loadingEl.classList.add('hidden');
+          contentEl.classList.remove('hidden');
+          ordersList.innerHTML = `
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-8 text-center">
+              <p class="text-gray-500 dark:text-gray-400">No orders found. <a href="/start-project" class="text-blue-600 hover:underline">Start a project</a></p>
+            </div>
+          `;
+          return;
+        }
+
+        loadingEl.classList.add('hidden');
+        contentEl.classList.remove('hidden');
+
+        ordersList.innerHTML = data.orders.map(order => {
+          const config = STATUS_CONFIG[order.order_status] || STATUS_CONFIG['intake'];
+          const demoLink = order.order_status === 'ready' && order.demo_url
+            ? `<a href="${order.demo_url}" class="mt-3 inline-block px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">View Demo</a>`
+            : '';
+
+          return `
+            <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm">
+              <div class="flex items-start justify-between gap-4">
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <span class="text-2xl">${config.icon}</span>
+                    <div>
+                      <h3 class="font-bold text-gray-900 dark:text-white text-lg">${order.business_name || order.product_type || 'Custom Project'}</h3>
+                      <p class="text-sm font-mono text-blue-600 dark:text-blue-400 font-semibold">${order.order_id}</p>
+                    </div>
+                  </div>
+                  <p class="text-gray-600 dark:text-gray-400 mt-2">${config.message}</p>
+                  <p class="text-xs text-gray-400 dark:text-gray-500 mt-2">Submitted ${formatDate(order.created_at)}</p>
+                </div>
+                <span class="shrink-0 px-3 py-1 rounded-full text-xs font-semibold ${config.badgeColor}">
+                  ${config.badge}
+                </span>
+              </div>
+              ${demoLink}
+            </div>
+          `;
+        }).join('');
+
+      } catch (err) {
+        console.error('Dashboard load error:', err);
+        loadingEl.classList.add('hidden');
+        loginEl.classList.remove('hidden');
+      }
+    }
+
+    // Load on page ready
+    loadDashboard();
+  </script>
+</Layout>

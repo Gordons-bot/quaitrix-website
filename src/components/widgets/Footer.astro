@@ -30,39 +30,38 @@ const {
   links = [],
   footNote = '',
   companyDescription = '',
-  contactEmail = 'manager@quaitrix.com',
+  contactEmail = 'contact@quaitrix.com',
 } = Astro.props;
 const mailtoHref = 'mailto:' + contactEmail;
 ---
 
-<footer class="relative border-t border-slate-700 not-prose bg-gray-900">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-      <div class="col-span-2 md:col-span-1">
-        <div class="mb-2">
-          <a class="inline-block font-bold text-xl text-white" href={getHomePermalink()}>{SITE?.name}</a>
-        </div>
-        <div class="text-sm text-gray-400 mb-4">
+<footer class="relative bg-slate-950 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-12 md:py-16">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8">
+      <!-- Brand -->
+      <div class="sm:col-span-2 lg:col-span-1">
+        <a class="inline-block font-bold text-xl text-white mb-3" href={getHomePermalink()}>{SITE?.name}</a>
+        <p class="text-sm sm:text-base text-slate-400 leading-relaxed mb-4 max-w-xs">
           {companyDescription}
-        </div>
-        <div class="text-sm text-gray-400">
-          <a href={mailtoHref} class="hover:underline">{contactEmail}</a>
-        </div>
+        </p>
+        <a href={mailtoHref} class="text-sm sm:text-base text-indigo-400 hover:text-indigo-300 transition-colors">{contactEmail}</a>
       </div>
+
+      <!-- Link Columns -->
       {
         links.map((section) => (
           <div>
-            <div class="text-white font-medium mb-2">{section.title}</div>
+            <h4 class="text-white font-semibold text-sm sm:text-base mb-4">{section.title}</h4>
             {section.links && section.links.length > 0 && (
-              <ul class="text-sm">
+              <ul class="space-y-3 list-none pl-0">
                 {section.links.map((link) => (
-                  <li class="mb-2">
+                  <li>
                     <a
-                      class="text-gray-400 hover:text-white hover:underline transition duration-150 ease-in-out"
+                      class="text-slate-400 hover:text-white text-sm sm:text-base transition-colors"
                       href={link.href}
                       aria-label={link.ariaLabel}
                     >
-                      <Fragment set:html={link.text} />
+                      <span set:html={link.text} />
                     </a>
                   </li>
                 ))}
@@ -72,28 +71,30 @@ const mailtoHref = 'mailto:' + contactEmail;
         ))
       }
     </div>
-    <div class="mt-8 pt-8 border-t border-gray-800 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
+    <!-- Bottom bar -->
+    <div class="mt-12 pt-8 border-t border-white/5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
       {
         socialLinks.length > 0 && (
-          <ul class="flex gap-4">
+          <ul class="flex gap-4 list-none pl-0">
             {socialLinks.map((link) => (
               <li>
                 <a
-                  class="text-gray-400 hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-700 rounded-lg text-sm p-3 inline-flex items-center"
+                  class="flex items-center justify-center w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-all"
                   aria-label={link.ariaLabel}
                   href={link.href}
                 >
                   {link.icon && <Icon name={link.icon} class="w-5 h-5" />}
-                  <Fragment set:html={link.text} />
+                  <span set:html={link.text} />
                 </a>
               </li>
             ))}
           </ul>
         )
       }
-      <div class="text-sm text-gray-500">
-        <Fragment set:html={footNote} />
-      </div>
+      <p class="text-base sm:text-base text-slate-400">
+        <span set:html={footNote} />
+      </p>
     </div>
   </div>
 </footer>

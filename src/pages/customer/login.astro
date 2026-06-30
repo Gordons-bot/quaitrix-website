@@ -1,0 +1,125 @@
+---
+// /root/CompanyWebsite/src/pages/customer/login.astro
+import Layout from '~/layouts/Layout.astro';
+---
+
+<Layout title="Log In — Quaitrix">
+  <main class="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center px-4">
+    <div class="w-full max-w-md">
+      <!-- Logo -->
+      <div class="text-center mb-8">
+        <a href="/" class="inline-block">
+          <span class="text-2xl font-bold text-gray-900 dark:text-white">Quaitrix</span>
+        </a>
+      </div>
+
+      <!-- Login Card -->
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
+        <div id="login-form-container">
+          <div class="text-center mb-6">
+            <div class="text-4xl mb-3">✉️</div>
+            <h1 class="text-xl font-bold text-gray-900 dark:text-white">Check Your Email</h1>
+            <p class="text-gray-600 dark:text-gray-400 mt-2 text-sm">
+              Enter your email and we'll send you a magic link to access your dashboard. No password needed.
+            </p>
+          </div>
+
+          <form id="login-form" class="space-y-4">
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                autocomplete="email"
+                placeholder="you@example.com"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
+              />
+            </div>
+            <button
+              type="submit"
+              id="submit-btn"
+              class="w-full px-4 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Send Magic Link
+            </button>
+          </form>
+        </div>
+
+        <!-- Success State -->
+        <div id="login-success" class="hidden text-center">
+          <div class="text-4xl mb-3">📬</div>
+          <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Check Your Inbox</h2>
+          <p class="text-gray-600 dark:text-gray-400 text-sm">
+            We've sent a magic link to <span id="sent-email" class="font-semibold"></span>. Click it to access your dashboard.
+          </p>
+          <p class="text-xs text-gray-400 dark:text-gray-500 mt-4">
+            Link expires in 1 hour. Check spam if you don't see it.
+          </p>
+        </div>
+
+        <!-- Error State -->
+        <div id="login-error" class="hidden mt-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+          <p class="text-sm text-red-700 dark:text-red-300" id="error-message"></p>
+        </div>
+      </div>
+
+      <p class="text-center text-xs text-gray-400 dark:text-gray-500 mt-6">
+        <a href="/" class="hover:text-gray-600 dark:hover:text-gray-300">← Back to homepage</a>
+      </p>
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById('login-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const formContainer = document.getElementById('login-form-container');
+    const successEl = document.getElementById('login-success');
+    const errorEl = document.getElementById('login-error');
+    const errorMessage = document.getElementById('error-message');
+    const sentEmail = document.getElementById('sent-email');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+
+      if (!email || !email.includes('@')) {
+        errorEl.classList.remove('hidden');
+        errorMessage.textContent = 'Please enter a valid email address.';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      errorEl.classList.add('hidden');
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          formContainer.classList.add('hidden');
+          successEl.classList.remove('hidden');
+          sentEmail.textContent = email;
+        } else {
+          errorEl.classList.remove('hidden');
+          errorMessage.textContent = data.error || 'Something went wrong. Please try again.';
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send Magic Link';
+        }
+      } catch (err) {
+        errorEl.classList.remove('hidden');
+        errorMessage.textContent = 'Network error. Please try again.';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Magic Link';
+      }
+    });
+  </script>
+</Layout>

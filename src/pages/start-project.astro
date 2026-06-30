@@ -2,171 +2,463 @@
 import PageLayout from '~/layouts/PageLayout.astro';
 ---
 
-<PageLayout title="Start Your Project">
-  <div class="max-w-2xl mx-auto p-6 bg-white/70 backdrop-blur-sm rounded-lg shadow mt-10">
-    <h1 class="text-3xl font-bold mb-2 text-center">Start Your Project</h1>
-    <p class="text-gray-600 text-center mb-8">Tell us what you need. We'll reply within 24 hours.</p>
-
-    <form id="projectForm">
-      <!-- Slide 1 -->
-      <div class="slide" id="slide-1">
-        <h3 class="text-xl font-semibold mb-4">1. What type of project do you need?</h3>
-        <label class="block p-3 border rounded mb-2 cursor-pointer hover:bg-gray-50"
-          ><input type="radio" name="project_type" value="Android App" required class="mr-2" /> Android App</label
-        >
-        <label class="block p-3 border rounded mb-2 cursor-pointer hover:bg-gray-50"
-          ><input type="radio" name="project_type" value="Website" class="mr-2" /> Website</label
-        >
-        <label class="block p-3 border rounded mb-2 cursor-pointer hover:bg-gray-50"
-          ><input type="radio" name="project_type" value="Both" class="mr-2" /> Both</label
-        >
+<PageLayout title="Start Your Project — Quaitrix" description="Tell us about your business. We'll build your custom demo website or app in 48 hours.">
+  <section class="min-h-screen px-4 py-12 sm:py-16">
+    <div class="max-w-2xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <h1 class="text-3xl sm:text-4xl font-bold text-white mb-2">Start Your Project</h1>
+        <p class="text-slate-400 text-sm sm:text-base">Fill in your details and we'll build a free demo for your business.</p>
       </div>
 
-      <!-- Slide 2 -->
-      <div class="slide hidden" id="slide-2">
-        <h3 class="text-xl font-semibold mb-4">2. What is the main purpose?</h3>
-        <label class="block p-3 border rounded mb-2 cursor-pointer hover:bg-gray-50"
-          ><input type="radio" name="purpose" value="Business Presence" required class="mr-2" /> Business Presence</label
-        >
-        <label class="block p-3 border rounded mb-2 cursor-pointer hover:bg-gray-50"
-          ><input type="radio" name="purpose" value="E-commerce" class="mr-2" /> E-commerce</label
-        >
-        <label class="block p-3 border rounded mb-2 cursor-pointer hover:bg-gray-50"
-          ><input type="radio" name="purpose" value="Portfolio" class="mr-2" /> Portfolio</label
-        >
-        <label class="block p-3 border rounded mb-2 cursor-pointer hover:bg-gray-50"
-          ><input type="radio" name="purpose" value="Other" class="mr-2" /> Other</label
-        >
-      </div>
-      <!-- Slide 3 (Contact) -->
-      <div class="slide hidden" id="slide-3">
-        <h3 class="text-xl font-semibold mb-4">3. Contact Information</h3>
-        <input type="text" name="name" placeholder="Your Name" required class="w-full p-3 border rounded mb-3" />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email Address"
-          required
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,}$"
-          title="Please enter a valid email address"
-          class="w-full p-3 border rounded mb-3"
-        />
-        <input
-          type="tel"
-          name="phone"
-          placeholder="Phone / WhatsApp (Optional)"
-          pattern="[+]?[(]?[0-9]{1,4}[)]?[- ./0-9]*"
-          title="Please enter a valid phone number"
-          class="w-full p-3 border rounded mb-3"
-        />
-        <textarea name="message" placeholder="Any specific details? (Optional)" class="w-full p-3 border rounded mb-3"
-        ></textarea>
+      <!-- Progress Indicator -->
+      <div class="flex items-center justify-between mb-8 px-2">
+        <div class="flex flex-col items-center flex-1">
+          <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all bg-indigo-600 text-white" id="step-dot-1">1</div>
+          <span class="text-xs text-slate-500 mt-1 hidden sm:block">Contact</span>
+        </div>
+        <div class="flex flex-col items-center flex-1">
+          <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all bg-slate-700 text-slate-400" id="step-dot-2">2</div>
+          <span class="text-xs text-slate-500 mt-1 hidden sm:block">Services</span>
+        </div>
+        <div class="flex flex-col items-center flex-1">
+          <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all bg-slate-700 text-slate-400" id="step-dot-3">3</div>
+          <span class="text-xs text-slate-500 mt-1 hidden sm:block">Business</span>
+        </div>
+        <div class="flex flex-col items-center flex-1">
+          <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all bg-slate-700 text-slate-400" id="step-dot-4">4</div>
+          <span class="text-xs text-slate-500 mt-1 hidden sm:block">Links</span>
+        </div>
+        <div class="flex flex-col items-center flex-1">
+          <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all bg-slate-700 text-slate-400" id="step-dot-5">5</div>
+          <span class="text-xs text-slate-500 mt-1 hidden sm:block">Design</span>
+        </div>
       </div>
 
-      <!-- Success Message -->
-      <div class="slide hidden text-center" id="slide-success">
-        <h3 class="text-2xl font-bold text-green-600 mb-4">Thank You!</h3>
-        <p class="text-gray-600">We have received your request and will contact you within 24 hours.</p>
-      </div>
+      <form id="projectForm" class="space-y-0">
+
+        <!-- ═══ STEP 1: Contact Information ═══ -->
+        <div class="slide" id="slide-1">
+          <h3 class="text-xl sm:text-2xl font-bold mb-6 text-white"><span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-indigo-600 text-sm font-bold mr-2">1</span>Contact Information</h3>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-400 mb-1">Your Full Name <span class="text-red-400">*</span></label>
+              <input type="text" id="contact_name" placeholder="e.g., John Graham" required class="inset-input w-full p-4 rounded-xl text-base min-h-[52px]" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-400 mb-1">Email Address <span class="text-red-400">*</span></label>
+              <input type="email" id="contact_email" placeholder="e.g., john@business.com" required class="inset-input w-full p-4 rounded-xl text-base min-h-[52px]" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-400 mb-1">Phone / WhatsApp <span class="text-red-400">*</span></label>
+              <input type="tel" id="contact_phone" placeholder="e.g., 5555 1234" required class="inset-input w-full p-4 rounded-xl text-base min-h-[52px]" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-400 mb-1">Business/Brand Name <span class="text-red-400">*</span></label>
+              <input type="text" id="business_name" placeholder="e.g., Cool Flow Plumbing" required class="inset-input w-full p-4 rounded-xl text-base min-h-[52px]" />
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ STEP 2: Project Details ═══ -->
+        <div class="slide hidden" id="slide-2">
+          <h3 class="text-xl sm:text-2xl font-bold mb-6 text-white"><span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-indigo-600 text-sm font-bold mr-2">2</span>Project Details</h3>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-400 mb-2">What do you need? <span class="text-red-400">*</span></label>
+              <div class="space-y-2">
+                <label class="radio-card metallic-bevel flex items-center p-4 rounded-xl cursor-pointer transition-all min-h-[56px] hover:border-indigo-400/30 group relative" data-radio-card><input type="radio" name="project_type" value="Website" required class="w-5 h-5 mr-3 shrink-0 accent-indigo-500" /> <span class="text-base text-slate-200 group-hover:text-white font-medium">Website</span><span class="check-mark absolute top-3 right-3 hidden w-6 h-6 rounded-full bg-indigo-600 items-center justify-center text-white text-xs font-bold">✓</span></label>
+                <label class="radio-card metallic-bevel flex items-center p-4 rounded-xl cursor-pointer transition-all min-h-[56px] hover:border-indigo-400/30 group relative" data-radio-card><input type="radio" name="project_type" value="Android App" class="w-5 h-5 mr-3 shrink-0 accent-indigo-500" /> <span class="text-base text-slate-200 group-hover:text-white font-medium">Android App</span><span class="check-mark absolute top-3 right-3 hidden w-6 h-6 rounded-full bg-indigo-600 items-center justify-center text-white text-xs font-bold">✓</span></label>
+                <label class="radio-card metallic-bevel flex items-center p-4 rounded-xl cursor-pointer transition-all min-h-[56px] hover:border-indigo-400/30 group relative" data-radio-card><input type="radio" name="project_type" value="Both" class="w-5 h-5 mr-3 shrink-0 accent-indigo-500" /> <span class="text-base text-slate-200 group-hover:text-white font-medium">Both</span><span class="check-mark absolute top-3 right-3 hidden w-6 h-6 rounded-full bg-indigo-600 items-center justify-center text-white text-xs font-bold">✓</span></label>
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-400 mb-1">Industry / Trade <span class="text-red-400">*</span></label>
+              <div class="relative">
+                <select id="trade" required class="inset-input w-full p-4 pr-10 rounded-xl text-base min-h-[52px] appearance-none cursor-pointer border-0 bg-[#1e293b] text-slate-200 focus:ring-2 focus:ring-indigo-500">
+                  <option value="" disabled selected class="text-slate-500">Select your industry...</option>
+                  <optgroup label="Premium Professionals" class="text-slate-800 font-bold">
+                    <option value="Dentist/Dental Clinic" class="text-slate-800 font-semibold">Dentist / Dental Clinic</option>
+                    <option value="Doctor/Medical Practice" class="text-slate-800 font-semibold">Doctor / Medical Practice</option>
+                    <option value="Lawyer/Law Firm" class="text-slate-800 font-semibold">Lawyer / Law Firm</option>
+                    <option value="Accountant/CPA" class="text-slate-800 font-semibold">Accountant / CPA</option>
+                    <option value="Marketing Agency" class="text-slate-800 font-semibold">Marketing Agency</option>
+                    <option value="Real Estate Agency" class="text-slate-800 font-semibold">Real Estate Agency</option>
+                    <option value="Financial Advisor" class="text-slate-800 font-semibold">Financial Advisor</option>
+                    <option value="Architect" class="text-slate-800 font-semibold">Architect</option>
+                    <option value="Engineering Firm" class="text-slate-800 font-semibold">Engineering Firm</option>
+                  </optgroup>
+                  <optgroup label="Business & Commerce" class="text-slate-800 font-bold">
+                    <option value="Online Shop/E-commerce" class="text-slate-800 font-semibold">Online Shop / E-commerce</option>
+                    <option value="Retail Store" class="text-slate-800 font-semibold">Retail Store</option>
+                    <option value="Restaurant/Café" class="text-slate-800 font-semibold">Restaurant / Café</option>
+                    <option value="Hotel/Accommodation" class="text-slate-800 font-semibold">Hotel / Accommodation</option>
+                    <option value="Beauty Salon/Spa" class="text-slate-800 font-semibold">Beauty Salon / Spa</option>
+                    <option value="Gym/Fitness Center" class="text-slate-800 font-semibold">Gym / Fitness Center</option>
+                  </optgroup>
+                  <optgroup label="Tech & Creative" class="text-slate-800 font-bold">
+                    <option value="Social Media Influencer" class="text-slate-800 font-semibold">Social Media Influencer</option>
+                    <option value="Content Creator" class="text-slate-800 font-semibold">Content Creator</option>
+                    <option value="Photographer/Videographer" class="text-slate-800 font-semibold">Photographer / Videographer</option>
+                    <option value="IT Services" class="text-slate-800 font-semibold">IT Services</option>
+                    <option value="Web Design Agency" class="text-slate-800 font-semibold">Web Design Agency</option>
+                    <option value="Consultant" class="text-slate-800 font-semibold">Consultant (Business/Management)</option>
+                    <option value="Coach/Trainer" class="text-slate-800 font-semibold">Coach / Trainer</option>
+                  </optgroup>
+                  <optgroup label="Trades & Services" class="text-slate-800 font-bold">
+                    <option value="Plumber" class="text-slate-800 font-semibold">Plumber</option>
+                    <option value="Electrician" class="text-slate-800 font-semibold">Electrician</option>
+                    <option value="AC Repair/HVAC" class="text-slate-800 font-semibold">AC Repair / HVAC</option>
+                    <option value="Landscaper/Gardener" class="text-slate-800 font-semibold">Landscaper / Gardener</option>
+                    <option value="Contractor/Builder" class="text-slate-800 font-semibold">Contractor / Builder</option>
+                    <option value="Painter" class="text-slate-800 font-semibold">Painter</option>
+                    <option value="Carpenter" class="text-slate-800 font-semibold">Carpenter</option>
+                    <option value="Mechanic/Auto Repair" class="text-slate-800 font-semibold">Mechanic / Auto Repair</option>
+                    <option value="Delivery Service" class="text-slate-800 font-semibold">Delivery Service</option>
+                    <option value="Cleaning Service" class="text-slate-800 font-semibold">Cleaning Service</option>
+                  </optgroup>
+                  <option value="Other" class="text-slate-800 font-semibold">Other (specify in services)</option>
+                </select>
+                <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+                  <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </div>
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-400 mb-1">Location / Town You Serve</label>
+              <input type="text" id="location" placeholder="e.g., Port Louis, Quatre Bornes" class="inset-input w-full p-4 rounded-xl text-base min-h-[52px]" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-400 mb-1">Main Services <span class="text-red-400">*</span></label>
+              <textarea id="services" placeholder="Describe what you do in 1-2 sentences.&#10;Example: I sell top brand perfumes and deliver to your doorstep." rows="3" required class="inset-input w-full p-4 rounded-xl text-base resize-none"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ STEP 2B: Online Presence & References (OPTIONAL) ═══ -->
+        <div class="slide hidden" id="slide-2b">
+          <h3 class="text-xl sm:text-2xl font-bold mb-6 text-white"><span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-indigo-600 text-sm font-bold mr-2">2B</span>Links &amp; Inspiration <span class="text-sm font-normal text-slate-400">(optional)</span></h3>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-300 mb-1">Links to your current online presence</label>
+              <p class="text-xs text-slate-500 mb-2">Facebook page, Instagram, existing website, Google Business — we'll analyze it to build your demo.</p>
+              <textarea id="existing_presence" placeholder="https://facebook.com/yourpage&#10;https://instagram.com/yourhandle&#10;https://yourwebsite.com" rows="3" class="inset-input w-full p-4 rounded-xl text-base resize-none"></textarea>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-300 mb-1">Reference websites for design inspiration</label>
+              <p class="text-xs text-slate-500 mb-2">Share websites whose structure or features you admire. We'll incorporate relevant elements into your demo.</p>
+              <textarea id="design_references" placeholder="https://example1.com&#10;https://example2.com" rows="2" class="inset-input w-full p-4 rounded-xl text-base resize-none"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ STEP 3: Business Information ═══ -->
+        <div class="slide hidden" id="slide-3">
+          <h3 class="text-xl sm:text-2xl font-bold mb-6 text-white"><span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-indigo-600 text-sm font-bold mr-2">3</span>Business Information</h3>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-400 mb-1">Tagline/Slogan <span class="text-slate-600">(optional)</span></label>
+              <input type="text" id="tagline" placeholder="e.g., Quality you can trust" class="inset-input w-full p-4 rounded-xl text-base min-h-[52px]" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-400 mb-1">Years in Business <span class="text-slate-600">(optional)</span></label>
+              <select id="years_in_business" class="inset-input w-full p-4 rounded-xl text-base min-h-[52px] appearance-none">
+                <option value="">Select...</option>
+                <option value="Just starting">Just starting</option>
+                <option value="1-2 years">1–2 years</option>
+                <option value="3-5 years">3–5 years</option>
+                <option value="5-10 years">5–10 years</option>
+                <option value="10+ years">10+ years</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-400 mb-1">What makes you different? <span class="text-slate-600">(optional)</span></label>
+              <textarea id="business_description" placeholder="Tell us what sets you apart from competitors..." rows="3" class="inset-input w-full p-4 rounded-xl text-base resize-none"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ STEP 4: Design Preferences ═══ -->
+        <div class="slide hidden" id="slide-4">
+          <h3 class="text-xl sm:text-2xl font-bold mb-6 text-white"><span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-indigo-600 text-sm font-bold mr-2">4</span>Design Preferences</h3>
+          <div class="space-y-6">
+            <div>
+              <label class="block text-sm font-semibold text-slate-300 mb-3">Visual Style</label>
+              <div class="grid grid-cols-2 gap-3" id="visualStyleGrid">
+                <label class="radio-card metallic-bevel relative p-4 rounded-xl cursor-pointer text-center transition-all duration-200 hover:border-indigo-400/30" data-radio-card>
+                  <input type="radio" name="visual_style" value="Modern & Clean" class="sr-only" />
+                  <span class="absolute top-2 right-2 hidden check-mark w-6 h-6 rounded-full bg-indigo-600 items-center justify-center text-white text-xs font-bold">✓</span>
+                  <span class="text-2xl block mb-1">✨</span>
+                  <span class="text-sm font-medium text-slate-200">Modern &amp; Clean</span>
+                </label>
+                <label class="radio-card metallic-bevel relative p-4 rounded-xl cursor-pointer text-center transition-all duration-200 hover:border-indigo-400/30" data-radio-card>
+                  <input type="radio" name="visual_style" value="Bold & Vibrant" class="sr-only" />
+                  <span class="absolute top-2 right-2 hidden check-mark w-6 h-6 rounded-full bg-indigo-600 items-center justify-center text-white text-xs font-bold">✓</span>
+                  <span class="text-2xl block mb-1">🔥</span>
+                  <span class="text-sm font-medium text-slate-200">Bold &amp; Vibrant</span>
+                </label>
+                <label class="radio-card metallic-bevel relative p-4 rounded-xl cursor-pointer text-center transition-all duration-200 hover:border-indigo-400/30" data-radio-card>
+                  <input type="radio" name="visual_style" value="Professional & Corporate" class="sr-only" />
+                  <span class="absolute top-2 right-2 hidden check-mark w-6 h-6 rounded-full bg-indigo-600 items-center justify-center text-white text-xs font-bold">✓</span>
+                  <span class="text-2xl block mb-1">💼</span>
+                  <span class="text-sm font-medium text-slate-200">Professional</span>
+                </label>
+                <label class="radio-card metallic-bevel relative p-4 rounded-xl cursor-pointer text-center transition-all duration-200 hover:border-indigo-400/30" data-radio-card>
+                  <input type="radio" name="visual_style" value="Elegant & Luxurious" class="sr-only" />
+                  <span class="absolute top-2 right-2 hidden check-mark w-6 h-6 rounded-full bg-indigo-600 items-center justify-center text-white text-xs font-bold">✓</span>
+                  <span class="text-2xl block mb-1">💎</span>
+                  <span class="text-sm font-medium text-slate-200">Elegant &amp; Luxe</span>
+                </label>
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-slate-300 mb-3">Color Preference</label>
+              <div class="grid grid-cols-3 gap-3" id="colorGrid">
+                <label class="cursor-pointer color-swatch relative group">
+                  <input type="radio" name="color_preference" value="Blue" class="sr-only" />
+                  <div class="color-block w-full h-14 rounded-xl bg-blue-600 transition-all duration-200 flex items-end p-2 border-2 border-transparent"><span class="text-xs text-white/90 font-medium">Blue</span></div>
+                  <span class="check-mark absolute -top-2 -right-2 hidden w-6 h-6 rounded-full bg-white items-center justify-center text-blue-600 text-xs font-bold border-2 border-blue-600">✓</span>
+                </label>
+                <label class="cursor-pointer color-swatch relative group">
+                  <input type="radio" name="color_preference" value="Green" class="sr-only" />
+                  <div class="color-block w-full h-14 rounded-xl bg-emerald-600 transition-all duration-200 flex items-end p-2 border-2 border-transparent"><span class="text-xs text-white/90 font-medium">Green</span></div>
+                  <span class="check-mark absolute -top-2 -right-2 hidden w-6 h-6 rounded-full bg-white items-center justify-center text-emerald-600 text-xs font-bold border-2 border-emerald-600">✓</span>
+                </label>
+                <label class="cursor-pointer color-swatch relative group">
+                  <input type="radio" name="color_preference" value="Red" class="sr-only" />
+                  <div class="color-block w-full h-14 rounded-xl bg-red-600 transition-all duration-200 flex items-end p-2 border-2 border-transparent"><span class="text-xs text-white/90 font-medium">Red</span></div>
+                  <span class="check-mark absolute -top-2 -right-2 hidden w-6 h-6 rounded-full bg-white items-center justify-center text-red-600 text-xs font-bold border-2 border-red-600">✓</span>
+                </label>
+                <label class="cursor-pointer color-swatch relative group">
+                  <input type="radio" name="color_preference" value="Purple" class="sr-only" />
+                  <div class="color-block w-full h-14 rounded-xl bg-purple-600 transition-all duration-200 flex items-end p-2 border-2 border-transparent"><span class="text-xs text-white/90 font-medium">Purple</span></div>
+                  <span class="check-mark absolute -top-2 -right-2 hidden w-6 h-6 rounded-full bg-white items-center justify-center text-purple-600 text-xs font-bold border-2 border-purple-600">✓</span>
+                </label>
+                <label class="cursor-pointer color-swatch relative group">
+                  <input type="radio" name="color_preference" value="Orange" class="sr-only" />
+                  <div class="color-block w-full h-14 rounded-xl bg-orange-500 transition-all duration-200 flex items-end p-2 border-2 border-transparent"><span class="text-xs text-white/90 font-medium">Orange</span></div>
+                  <span class="check-mark absolute -top-2 -right-2 hidden w-6 h-6 rounded-full bg-white items-center justify-center text-orange-600 text-xs font-bold border-2 border-orange-500">✓</span>
+                </label>
+                <label class="cursor-pointer color-swatch relative group">
+                  <input type="radio" name="color_preference" value="Teal" class="sr-only" />
+                  <div class="color-block w-full h-14 rounded-xl bg-teal-600 transition-all duration-200 flex items-end p-2 border-2 border-transparent"><span class="text-xs text-white/90 font-medium">Teal</span></div>
+                  <span class="check-mark absolute -top-2 -right-2 hidden w-6 h-6 rounded-full bg-white items-center justify-center text-teal-600 text-xs font-bold border-2 border-teal-600">✓</span>
+                </label>
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-slate-300 mb-3">Do you have a logo?</label>
+              <div class="space-y-2" id="logoGroup">
+                <label class="radio-card metallic-bevel flex items-center p-4 rounded-xl cursor-pointer transition-all hover:border-indigo-400/30 group relative" data-radio-card>
+                  <input type="radio" name="has_logo" value="1" class="w-5 h-5 mr-3 shrink-0 accent-indigo-500" />
+                  <span class="text-base text-slate-200 group-hover:text-white font-medium">Yes</span>
+                  <span class="check-mark absolute top-3 right-3 hidden w-6 h-6 rounded-full bg-indigo-600 items-center justify-center text-white text-xs font-bold">✓</span>
+                </label>
+                <label class="radio-card metallic-bevel flex items-center p-4 rounded-xl cursor-pointer transition-all hover:border-indigo-400/30 group relative" data-radio-card>
+                  <input type="radio" name="has_logo" value="0" class="w-5 h-5 mr-3 shrink-0 accent-indigo-500" />
+                  <span class="text-base text-slate-200 group-hover:text-white font-medium">No</span>
+                  <span class="check-mark absolute top-3 right-3 hidden w-6 h-6 rounded-full bg-indigo-600 items-center justify-center text-white text-xs font-bold">✓</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </form>
 
       <!-- Navigation Buttons -->
-      <div class="flex justify-between mt-6" id="nav-buttons">
-        <button type="button" id="prevBtn" class="px-6 py-2 bg-gray-200 rounded hidden" onclick="changeSlide(-1)"
-          >Previous</button
-        >
-        <button
-          type="button"
-          id="nextBtn"
-          class="px-6 py-2 bg-blue-600 text-white rounded opacity-50 cursor-not-allowed"
-          disabled
-          onclick="changeSlide(1)">Next</button
-        >
-        <button
-          type="button"
-          id="submitBtn"
-          class="px-6 py-2 bg-green-600 text-white rounded hidden"
-          onclick="submitForm()">Submit</button
-        >
+      <div class="fixed bottom-0 left-0 right-0 z-30 bg-slate-900/95 backdrop-blur-sm border-t border-white/10 p-4 sm:relative sm:bg-transparent sm:border-0 sm:backdrop-blur-none sm:p-0 sm:mt-6" id="nav-buttons">
+        <div class="max-w-2xl mx-auto flex justify-between gap-3">
+          <button type="button" id="prevBtn" class="flex-1 sm:flex-none px-6 py-3 bg-slate-700/80 text-slate-200 rounded-xl font-medium hidden hover:bg-slate-600 transition-colors min-h-[48px] border border-white/10" onclick="changeSlide(-1)">Previous</button>
+          <button type="button" id="nextBtn" class="flex-1 sm:flex-none px-6 py-3 glossy-button text-white rounded-xl font-medium opacity-50 cursor-not-allowed min-h-[48px]" disabled onclick="changeSlide(1)">Next</button>
+          <button type="button" id="submitBtn" class="flex-1 sm:flex-none px-6 py-3 glossy-button-green text-white rounded-xl font-medium hidden min-h-[48px]" onclick="submitForm()">Submit</button>
+        </div>
       </div>
-    </form>
-  </div>
 
-  <script>
-    let currentSlide = 1;
-    const totalSlides = 3;
+    </div>
+  </section>
+
+  <script is:inline>
+    // Slide sequence: supports numeric + named slides (e.g., "2b")
+    var slideSequence = ['1', '2', '2b', '3', '4'];
+    var currentIdx = 0;
+
+    function currentSlideId() { return slideSequence[currentIdx]; }
+    function totalSlides() { return slideSequence.length; }
+
+    function isSlideValid(slideId) {
+      var slideEl = document.getElementById('slide-' + slideId);
+      if (!slideEl) return true;
+      var required = slideEl.querySelectorAll('[required]');
+      for (var i = 0; i < required.length; i++) {
+        var el = required[i];
+        if (el.type === 'radio') {
+          var name = el.name;
+          if (!slideEl.querySelector('input[name="' + name + '"]:checked')) return false;
+        } else if (el.type === 'checkbox') {
+          if (!el.checked) return false;
+        } else {
+          if (!el.value.trim()) return false;
+        }
+      }
+      return true;
+    }
 
     function updateButtons() {
-      const nextBtn = document.getElementById('nextBtn');
-      const prevBtn = document.getElementById('prevBtn');
-      const submitBtn = document.getElementById('submitBtn');
+      var nextBtn = document.getElementById('nextBtn');
+      var prevBtn = document.getElementById('prevBtn');
+      var submitBtn = document.getElementById('submitBtn');
+      var valid = isSlideValid(currentSlideId());
+      var isLast = currentIdx === slideSequence.length - 1;
 
-      // Check if current slide inputs are valid to enable Next
-      const currentSlideEl = document.getElementById('slide-' + currentSlide);
-      const inputs = currentSlideEl.querySelectorAll('input[required]');
-      let isValid = true;
-      inputs.forEach((input) => {
-        if (input.type === 'radio') {
-          if (!currentSlideEl.querySelector(`input[name="${input.name}"]:checked`)) isValid = false;
-        } else {
-          if (!input.value.trim() || !input.checkValidity()) isValid = false;
-        }
-      });
-
-      if (currentSlide === totalSlides) {
+      if (isLast) {
         nextBtn.classList.add('hidden');
         submitBtn.classList.remove('hidden');
-        submitBtn.disabled = !isValid;
-        submitBtn.className = isValid
-          ? 'px-6 py-2 bg-green-600 text-white rounded'
-          : 'px-6 py-2 bg-gray-400 text-white rounded cursor-not-allowed';
+        submitBtn.disabled = !valid;
+        submitBtn.className = valid
+          ? 'flex-1 sm:flex-none px-6 py-3 glossy-button-green text-white rounded-xl font-medium min-h-[48px]'
+          : 'flex-1 sm:flex-none px-6 py-3 bg-slate-700 text-slate-400 rounded-xl font-medium cursor-not-allowed min-h-[48px]';
       } else {
         nextBtn.classList.remove('hidden');
         submitBtn.classList.add('hidden');
-        nextBtn.disabled = !isValid;
-        nextBtn.className = isValid
-          ? 'px-6 py-2 bg-blue-600 text-white rounded'
-          : 'px-6 py-2 bg-gray-400 text-white rounded cursor-not-allowed';
+        nextBtn.disabled = !valid;
+        nextBtn.className = valid
+          ? 'flex-1 sm:flex-none px-6 py-3 glossy-button text-white rounded-xl font-medium min-h-[48px]'
+          : 'flex-1 sm:flex-none px-6 py-3 bg-slate-700 text-slate-400 rounded-xl font-medium cursor-not-allowed min-h-[48px]';
       }
 
-      prevBtn.classList.toggle('hidden', currentSlide === 1);
+      prevBtn.classList.toggle('hidden', currentIdx === 0);
+    }
+
+    function updateProgress() {
+      for (var i = 0; i < slideSequence.length; i++) {
+        var dot = document.getElementById('step-dot-' + (i + 1));
+        if (!dot) continue;
+        if (i === currentIdx) {
+          dot.className = 'w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all bg-indigo-600 text-white scale-110';
+        } else if (i < currentIdx) {
+          dot.className = 'w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all bg-emerald-600 text-white';
+        } else {
+          dot.className = 'w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all bg-slate-700 text-slate-400';
+        }
+      }
     }
 
     function changeSlide(n) {
-      document.getElementById('slide-' + currentSlide).classList.add('hidden');
-      currentSlide += n;
-      document.getElementById('slide-' + currentSlide).classList.remove('hidden');
+      var newIdx = currentIdx + n;
+      if (newIdx >= slideSequence.length || newIdx < 0) return;
+      document.getElementById('slide-' + currentSlideId()).classList.add('hidden');
+      currentIdx = newIdx;
+      document.getElementById('slide-' + currentSlideId()).classList.remove('hidden');
       updateButtons();
+      updateProgress();
     }
 
     async function submitForm() {
-      const form = document.getElementById('projectForm');
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
+      var getRadio = function(name) {
+        var el = document.querySelector('input[name="' + name + '"]:checked');
+        return el ? el.value : null;
+      };
+
+      // Map visual style display values to API enum
+      var styleMap = {
+        'Modern & Clean': 'modern',
+        'Bold & Vibrant': 'bold',
+        'Professional & Corporate': 'classic',
+        'Elegant & Luxurious': 'minimal',
+      };
+
+      var rawServices = document.getElementById('services').value;
+      var servicesArr = rawServices ? rawServices.split(/[\n,;]/).map(function(s) { return s.trim(); }).filter(Boolean) : [];
+
+      var existingPresence = document.getElementById('existing_presence').value;
+      var designReferences = document.getElementById('design_references').value;
+
+      var data = {
+        businessName: document.getElementById('business_name').value,
+        industry: document.getElementById('trade').value,
+        location: document.getElementById('location').value,
+        services: servicesArr,
+        designPreference: styleMap[getRadio('visual_style')] || null,
+        existingPresence: existingPresence.trim() || null,
+        designReferences: designReferences.trim() || null,
+        contact: {
+          name: document.getElementById('contact_name').value,
+          phone: document.getElementById('contact_phone').value,
+          email: document.getElementById('contact_email').value,
+        }
+      };
 
       try {
-        const res = await fetch('/api/questionnaire/submit', {
+        var res = await fetch('/api/intake', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
-        if (res.ok) {
-          document.getElementById('slide-' + currentSlide).classList.add('hidden');
-          document.getElementById('slide-success').classList.remove('hidden');
-          document.getElementById('nav-buttons').classList.add('hidden');
+        var result = await res.json();
+        if (res.ok && result.success) {
+          window.location.href = '/success?order=' + encodeURIComponent(result.orderId);
+        } else {
+          var errMsg = result.error || 'Error submitting. Please try again.';
+          if (result.details && result.details.length) {
+            errMsg += '\n\n' + result.details.join('\n');
+          }
+          alert(errMsg);
         }
       } catch (_err) {
         alert('Error submitting form. Please try again.');
       }
     }
-    // Listen to all inputs to update button states immediately
-    document.querySelectorAll('input, textarea').forEach((el) => {
-      el.addEventListener('input', updateButtons);
-      el.addEventListener('change', updateButtons);
-    });
 
-    updateButtons(); // Init
+    // Listen to all inputs
+    var allInputs = document.querySelectorAll('input, textarea, select');
+    for (var i = 0; i < allInputs.length; i++) {
+      allInputs[i].addEventListener('change', updateButtons);
+      allInputs[i].addEventListener('input', updateButtons);
+    }
 
-    // Expose to inline onclick handlers (Astro module scope otherwise hides them)
+    // Radio card visual selection state
+    var radioCards = document.querySelectorAll('[data-radio-card]');
+    for (var i = 0; i < radioCards.length; i++) {
+      radioCards[i].addEventListener('change', function() {
+        var name = this.querySelector('input[type="radio"]').name;
+        var siblings = document.querySelectorAll('[data-radio-card] input[type="radio"][name="' + name + '"]');
+        for (var j = 0; j < siblings.length; j++) {
+          siblings[j].closest('[data-radio-card]').classList.remove('metallic-radio-selected');
+        }
+        this.classList.add('metallic-radio-selected');
+      });
+    }
+
+    // Color swatch selection state
+    var colorSwatches = document.querySelectorAll('.color-swatch input[type="radio"]');
+    for (var i = 0; i < colorSwatches.length; i++) {
+      colorSwatches[i].addEventListener('change', function() {
+        var name = this.name;
+        var siblings = document.querySelectorAll('.color-swatch input[type="radio"][name="' + name + '"]');
+        for (var j = 0; j < siblings.length; j++) {
+          siblings[j].closest('.color-swatch').querySelector('.color-block').style.borderColor = 'transparent';
+          siblings[j].closest('.color-swatch').querySelector('.color-block').style.transform = 'scale(1)';
+          siblings[j].closest('.color-swatch').querySelector('.check-mark').style.display = 'none';
+        }
+        this.closest('.color-swatch').querySelector('.color-block').style.borderColor = 'white';
+        this.closest('.color-swatch').querySelector('.color-block').style.transform = 'scale(1.05)';
+        this.closest('.color-swatch').querySelector('.check-mark').style.display = 'flex';
+      });
+    }
+
+    // Event delegation on form
+    var formEl = document.getElementById('projectForm');
+    if (formEl) {
+      formEl.addEventListener('click', function(e) {
+        setTimeout(updateButtons, 0);
+      });
+      formEl.addEventListener('change', updateButtons);
+    }
+
+    updateProgress();
+    updateButtons();
+
     window.changeSlide = changeSlide;
     window.submitForm = submitForm;
   </script>

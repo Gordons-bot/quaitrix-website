@@ -1,0 +1,55 @@
+---
+import PageLayout from '~/layouts/PageLayout.astro';
+---
+
+<PageLayout title="Order Received — Quaitrix" description="Your project order has been received. A designer is reviewing your business.">
+  <section class="min-h-[70vh] flex items-center justify-center px-4 py-12">
+    <div class="max-w-lg w-full text-center">
+      <!-- Success Icon -->
+      <div class="text-6xl sm:text-7xl mb-6">🎨</div>
+      
+      <!-- Heading -->
+      <h1 class="text-2xl sm:text-3xl font-bold text-emerald-400 mb-4">
+        A Designer Is Reviewing Your Business
+      </h1>
+      
+      <!-- Description -->
+      <p class="text-slate-300 mb-3 text-base sm:text-lg">
+        We've received your project details and our team is now preparing your custom demo.
+      </p>
+      
+      <!-- Order ID -->
+      <p id="order-display" class="mt-6 text-lg font-mono text-indigo-400"></p>
+      
+      <!-- Next Steps -->
+      <div class="mt-8 metallic-bevel rounded-xl p-6 text-left">
+        <h3 class="text-slate-200 font-semibold mb-3">What happens next?</h3>
+        <ol class="space-y-2 text-sm text-slate-400">
+          <li class="flex gap-2"><span class="text-emerald-400 shrink-0">✓</span> Check your email — we sent you a magic link to track progress</li>
+          <li class="flex gap-2"><span class="text-slate-500 shrink-0">○</span> A designer builds your personalized demo</li>
+          <li class="flex gap-2"><span class="text-slate-500 shrink-0">○</span> You receive a link to preview and request changes</li>
+          <li class="flex gap-2"><span class="text-slate-500 shrink-0">○</span> Approve and we deploy your final site or app</li>
+        </ol>
+      </div>
+      
+      <!-- Back Link -->
+      <div class="mt-6">
+        <a href="/" class="text-indigo-400 hover:text-indigo-300 text-sm transition-colors">
+          ← Back to homepage
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    // Read order ID from URL and display it
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var orderId = params.get('order');
+      if (orderId) {
+        var el = document.getElementById('order-display');
+        if (el) el.textContent = 'Order: ' + orderId;
+      }
+    })();
+  </script>
+</PageLayout>

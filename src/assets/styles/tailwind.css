@@ -13,6 +13,14 @@
   --color-default: var(--aw-color-text-default);
   --color-muted: var(--aw-color-text-muted);
 
+  --color-brand-glow: #6366f1;
+  --color-metal-light: #334155;
+  --color-metal-dark: #0f172a;
+
+  --shadow-glow-sm: 0 0 10px rgba(99, 102, 241, 0.2);
+  --shadow-glow-md: 0 0 20px rgba(99, 102, 241, 0.3);
+  --shadow-glow-lg: 0 0 30px rgba(99, 102, 241, 0.4);
+
   --font-sans:
     'var(--aw-font-sans, ui-sans-serif)', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
@@ -53,6 +61,185 @@
   @apply btn border-none shadow-none text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white;
 }
 
+/* ═══════════════════════════════════════════════════════════════════ */
+/* MODERN SKEUOMORPHISM — Mountain Lion/Mavericks Inspired           */
+/* Sharp Metallic Bevels + Micro-Glows                                */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+/* Metallic panel — floating recessed metal */
+.metallic-bevel {
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Metallic panel with glow accent */
+.metallic-bevel-glow {
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(99, 102, 241, 0.15);
+}
+
+/* Glossy capsule button — physical, tactile */
+.glossy-button {
+  background: linear-gradient(180deg, #818cf8 0%, #4f46e5 50%, #4338ca 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(99, 102, 241, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+.glossy-button:hover {
+  background: linear-gradient(180deg, #a5b4fc 0%, #6366f1 50%, #4f46e5 100%);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.35),
+    0 0 25px rgba(99, 102, 241, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+.glossy-button:active {
+  transform: translateY(1px);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    0 0 10px rgba(99, 102, 241, 0.3),
+    inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Glossy button — green variant */
+.glossy-button-green {
+  background: linear-gradient(180deg, #4ade80 0%, #16a34a 50%, #15803d 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(74, 222, 128, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+.glossy-button-green:hover {
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.35),
+    0 0 25px rgba(74, 222, 128, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+.glossy-button-green:active {
+  transform: translateY(1px);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Inset input field — recessed, tactile */
+.inset-input {
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top-color: rgba(0, 0, 0, 0.4);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.5),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+  color: #e2e8f0;
+  transition: all 0.2s ease;
+}
+.inset-input::placeholder {
+  color: #64748b;
+}
+.inset-input:focus {
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.5),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.03),
+    0 0 15px rgba(99, 102, 241, 0.3);
+  outline: none;
+}
+
+/* Glow text — for accent words */
+.glow-text {
+  text-shadow:
+    0 0 10px rgba(99, 102, 241, 0.5),
+    0 0 30px rgba(99, 102, 241, 0.3),
+    0 0 60px rgba(99, 102, 241, 0.15);
+}
+
+/* Subtle radial glow for hero backgrounds */
+.hero-glow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Metallic card hover state */
+.metallic-card-interactive {
+  transition: all 0.3s ease;
+}
+.metallic-card-interactive:hover {
+  border-top-color: rgba(255, 255, 255, 0.25);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(99, 102, 241, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Selected state for radio cards */
+.metallic-radio-selected {
+  border: 1px solid rgba(99, 102, 241, 0.6) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(99, 102, 241, 0.25),
+    inset 0 0 15px rgba(99, 102, 241, 0.05) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* FORM RADIO CARDS — Visual selection state for Step 4              */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+/* When radio card input is checked, style the parent label:has(input) */
+.radio-card:has(input[type="radio"]:checked) {
+  border: 2px solid #6366f1 !important;
+  border-color: #6366f1 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.5),
+    0 0 24px rgba(99, 102, 241, 0.35),
+    inset 0 0 20px rgba(99, 102, 241, 0.08) !important;
+  transform: scale(1.02);
+}
+
+.radio-card:has(input[type="radio"]:checked) .check-mark {
+  display: flex !important;
+}
+
+/* Color swatch selected state */
+.color-swatch:has(input[type="radio"]:checked) .color-block {
+  border-color: white !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5), 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  transform: scale(1.05);
+}
+
+.color-swatch:has(input[type="radio"]:checked) .check-mark {
+  display: flex !important;
+}
+
+/* Header scroll effect */
 #header.scroll > div:first-child {
   background-color: rgb(255 255 255);
   @media (min-width: 768px) {

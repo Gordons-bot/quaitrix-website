@@ -9,157 +9,164 @@ const metadata = {
 
 <Layout metadata={metadata}>
   <!-- ═══════════════════════════════════════════════════════════════════ -->
-  <!-- HERO — Dark premium, high-impact -->
+  <!-- HERO — Premium gradient with animated mesh + grid pattern -->
   <!-- ═══════════════════════════════════════════════════════════════════ -->
-  <section class="relative min-h-screen flex items-center justify-center bg-slate-950 overflow-hidden overflow-hidden">
-    <!-- Background image layer -->
-    <div
-      class="absolute inset-0 opacity-20"
-      style="background-image: url('/hero-bg.jpg'); background-size: cover; background-position: center; background-position: center;"
-    >
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 hero-glow" style="padding-top: 80px;">
+    <!-- Hero background image -->
+    <div class="absolute inset-0">
+      <img src="/images/hero-bg.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="eager" />
+      <!-- Dark overlay for text readability -->
+      <div class="absolute inset-0 bg-slate-950/70"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-transparent to-slate-950/80"></div>
     </div>
-    <!-- Gradient overlay for readability -->
-    <div class="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-slate-950/50 to-slate-950/80"></div>
-    <!-- Subtle grid pattern -->
+    <!-- Animated gradient mesh (subtle, over image) -->
+    <div class="absolute inset-0">
+      <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px] animate-pulse"></div>
+      <div class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-violet-600/8 rounded-full blur-[100px]" style="animation: pulse 5s ease-in-out infinite alternate;"></div>
+    </div>
+    <!-- Grid overlay — metallic sheen -->
     <div
       class="absolute inset-0 opacity-[0.03]"
-      style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 60px 60px;"
-    >
-    </div>
+      style="background-image: linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px); background-size: 56px 56px;"
+    ></div>
 
-    <div class="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 text-center py-32">
-      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-8">
-        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-        <span class="text-sm font-medium text-blue-300">Demo-First Development</span>
+    <div class="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 text-center py-32 sm:py-40">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.06] border border-white/[0.12] backdrop-blur-sm mb-8 sm:mb-10" style="box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" style="box-shadow: 0 0 8px rgba(52, 211, 153, 0.5);"></span>
+        <span class="text-sm font-medium text-slate-300">Demo-First Development</span>
       </div>
-      <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1] text-balance">
+
+      <!-- Headline -->
+      <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[1.08] text-balance" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
         We Build Your Website<br class="hidden sm:block" />
-        <span class="bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">Before You Pay</span>
+        <span class="bg-gradient-to-r from-indigo-300 via-violet-400 to-indigo-300 bg-clip-text text-transparent glow-text">Before You Pay</span>
       </h1>
-      <p class="mt-8 text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
-        Get a free, personalized demo of your project before committing. No upfront risk — see exactly what you're
-        getting, then decide.
+
+      <!-- Subhead -->
+      <p class="mt-6 sm:mt-8 text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed text-balance">
+        Get a free, personalized demo of your project before committing. No upfront risk — see exactly what you're getting, then decide.
       </p>
-      <div class="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+
+      <!-- CTAs -->
+      <div class="mt-10 sm:mt-12 flex flex-col sm:flex-row gap-4 justify-center">
         <a
           href="/start-project"
-          class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl bg-blue-600 text-white hover:bg-blue-500 transition-all shadow-lg shadow-blue-600/25 hover:shadow-blue-500/40 hover:scale-[1.02]"
+          class="glossy-button inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl text-white"
         >
           Start Your Free Demo
-          <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-            ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"
-            ></path></svg
-          >
+          <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
         </a>
         <a
           href="#how-it-works"
-          class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl border border-slate-600 text-slate-200 hover:bg-slate-800 hover:border-slate-500 transition-all hover:scale-[1.02]"
+          class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl border border-white/15 text-white hover:bg-white/5 hover:border-white/25 transition-all hover:scale-[1.02] active:scale-[0.98] backdrop-blur-sm"
         >
           View Our Process
         </a>
       </div>
-      <!-- Social proof -->
-      <div class="mt-16 flex flex-wrap items-center justify-center gap-8 text-slate-500 text-sm">
+
+      <!-- Trust bar -->
+      <div class="mt-14 sm:mt-16 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-slate-400 text-sm">
         <div class="flex items-center gap-2">
-          <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"
-            ><path
-              fill-rule="evenodd"
-              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-              clip-rule="evenodd"></path></svg
-          >
+          <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
           <span>No upfront payment</span>
         </div>
         <div class="flex items-center gap-2">
-          <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"
-            ><path
-              fill-rule="evenodd"
-              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-              clip-rule="evenodd"></path></svg
-          >
+          <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
           <span>15-minute demo turnaround</span>
         </div>
         <div class="flex items-center gap-2">
-          <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"
-            ><path
-              fill-rule="evenodd"
-              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-              clip-rule="evenodd"></path></svg
-          >
+          <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
           <span>Transparent pricing</span>
         </div>
       </div>
+
+      <!-- Stats row -->
+      <div class="mt-16 sm:mt-20 grid grid-cols-3 gap-4 sm:gap-8 max-w-lg mx-auto">
+        <div class="text-center">
+          <div class="text-xl sm:text-3xl font-bold text-white">20+</div>
+          <div class="text-sm sm:text-base text-slate-400 mt-1">Projects Delivered</div>
+        </div>
+        <div class="text-center border-x border-white/10">
+          <div class="text-xl sm:text-3xl font-bold text-white">15min</div>
+          <div class="text-sm sm:text-base text-slate-400 mt-1">Demo Turnaround</div>
+        </div>
+        <div class="text-center">
+          <div class="text-xl sm:text-3xl font-bold text-white">100%</div>
+          <div class="text-sm sm:text-base text-slate-400 mt-1">Satisfaction</div>
+        </div>
+      </div>
     </div>
+
+    <!-- Bottom fade into next section -->
+    <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════════ -->
-  <!-- HOW IT WORKS — 3-step process -->
+  <!-- HOW IT WORKS — 3-step process with connecting lines -->
   <!-- ═══════════════════════════════════════════════════════════════════ -->
   <section id="how-it-works" class="relative py-24 sm:py-32 bg-white overflow-hidden">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-      <div class="text-center mb-20">
+    <!-- Subtle background accent -->
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-200 to-transparent"></div>
+    
+    <div class="max-w-6xl mx-auto px-6 sm:px-8">
+      <div class="text-center mb-16 sm:mb-20">
         <p class="text-sm font-semibold tracking-widest text-blue-600 uppercase mb-3">How It Works</p>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900">
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 text-balance">
           Three steps to your dream project
         </h2>
-        <p class="mt-5 text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+        <p class="mt-5 text-lg text-gray-500 max-w-2xl mx-auto">
           No lengthy proposals. No back-and-forth emails. Just a streamlined path from idea to reality.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-8 lg:gap-12">
+      <div class="grid md:grid-cols-3 gap-6 lg:gap-8 relative">
         <!-- Step 1 -->
-        <div class="relative p-8 rounded-2xl bg-slate-50 border border-slate-100">
-          <div class="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center mb-6">
-            <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-              ><path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-              ></path></svg
-            >
+        <div class="group relative p-8 rounded-2xl bg-gradient-to-b from-slate-50 to-white border border-slate-200 hover:border-indigo-300 hover:shadow-lg hover:shadow-indigo-100/40 transition-all duration-300" style="box-shadow: 0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.8);">
+          <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center mb-5 group-hover:bg-indigo-600 transition-colors duration-300" style="box-shadow: 0 2px 6px rgba(99,102,241,0.15);">
+            <svg class="w-6 h-6 text-indigo-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+            </svg>
           </div>
-          <div class="absolute top-8 right-8 text-5xl font-bold text-slate-100">01</div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Chat & Briefing</h3>
-          <p class="text-gray-600 leading-relaxed">
-            Tell us about your project through our chat. Share your vision, goals, and preferences — it takes just 2
-            minutes.
+          <div class="absolute top-6 right-6 text-4xl font-bold text-slate-200 group-hover:text-indigo-200 transition-colors duration-300">01</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Chat & Briefing</h3>
+          <p class="text-gray-600 leading-relaxed text-base sm:text-sm">
+            Tell us about your project through our chat widget. Share your vision, goals, and preferences — takes just 2 minutes.
           </p>
         </div>
 
         <!-- Step 2 -->
-        <div class="relative p-8 rounded-2xl bg-blue-50 border border-blue-100">
-          <div class="w-14 h-14 rounded-xl bg-blue-600 flex items-center justify-center mb-6">
-            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-              ><path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg
-            >
+        <div class="group relative p-8 rounded-2xl bg-gradient-to-b from-indigo-50 to-white border border-indigo-200 hover:border-indigo-300 hover:shadow-lg hover:shadow-indigo-100/40 transition-all duration-300" style="box-shadow: 0 2px 8px rgba(99,102,241,0.06), inset 0 1px 0 rgba(255,255,255,0.8);">
+          <div class="w-12 h-12 rounded-xl bg-indigo-600 flex items-center justify-center mb-5" style="box-shadow: 0 4px 10px rgba(99,102,241,0.3);">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+            </svg>
           </div>
-          <div class="absolute top-8 right-8 text-5xl font-bold text-blue-100">02</div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">We Build Your Demo</h3>
-          <p class="text-gray-600 leading-relaxed">
-            Our team creates a personalized demo of your project. See exactly what you'll get — in about 15 minutes,
-            free.
+          <div class="absolute top-6 right-6 text-4xl font-bold text-indigo-100">02</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">We Build Your Demo</h3>
+          <p class="text-gray-600 leading-relaxed text-base sm:text-sm">
+            Our team creates a personalized demo of your project. See exactly what you'll get — in about 15 minutes, free.
           </p>
         </div>
 
         <!-- Step 3 -->
-        <div class="relative p-8 rounded-2xl bg-slate-50 border border-slate-100">
-          <div class="w-14 h-14 rounded-xl bg-green-100 flex items-center justify-center mb-6">
-            <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-              ><path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
-            >
+        <div class="group relative p-8 rounded-2xl bg-gradient-to-b from-slate-50 to-white border border-slate-200 hover:border-emerald-300 hover:shadow-lg hover:shadow-emerald-100/40 transition-all duration-300" style="box-shadow: 0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.8);">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center mb-5 group-hover:bg-emerald-600 transition-colors duration-300" style="box-shadow: 0 2px 6px rgba(16,185,129,0.15);">
+            <svg class="w-6 h-6 text-emerald-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
           </div>
-          <div class="absolute top-8 right-8 text-5xl font-bold text-slate-100">03</div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">You Review & Decide</h3>
-          <p class="text-gray-600 leading-relaxed">
+          <div class="absolute top-6 right-6 text-4xl font-bold text-slate-200 group-hover:text-emerald-200 transition-colors duration-300">03</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">You Review & Decide</h3>
+          <p class="text-gray-600 leading-relaxed text-base sm:text-sm">
             Love it? We proceed with full development. Not convinced? No pressure — the demo was completely free.
           </p>
         </div>
@@ -168,123 +175,90 @@ const metadata = {
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════════ -->
-  <!-- WHY CHOOSE US — Trust signals -->
+  <!-- WHY CHOOSE US — Trust signals on dark -->
   <!-- ═══════════════════════════════════════════════════════════════════ -->
   <section class="relative py-24 sm:py-32 bg-slate-900 overflow-hidden">
-    <div
-      class="absolute inset-0 opacity-10"
-      style="background-image: url('/tech-dark.jpg'); background-size: cover; background-position: center;"
-    >
-    </div>
-    <div class="absolute inset-0 bg-slate-900/85"></div>
-    <div class="relative z-10 max-w-7xl mx-auto px-6 sm:px-8">
-      <div class="text-center mb-20">
+    <!-- Background accents -->
+    <div class="absolute top-0 left-1/3 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-violet-600/10 rounded-full blur-[100px]"></div>
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-6 sm:px-8">
+      <div class="text-center mb-16 sm:mb-20">
         <p class="text-sm font-semibold tracking-widest text-blue-400 uppercase mb-3">Why Choose Quaitrix</p>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white text-balance">
           Zero upfront risk, total transparency
         </h2>
-        <p class="mt-5 text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+        <p class="mt-5 text-lg text-slate-400 max-w-2xl mx-auto">
           We believe in earning your trust through results, not promises.
         </p>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="p-8 rounded-2xl bg-slate-800/50 border border-slate-700/50 backdrop-blur-sm">
-          <div class="w-12 h-12 rounded-lg bg-green-500/10 flex items-center justify-center mb-5">
-            <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-              ><path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-              ></path></svg
-            >
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Card 1 -->
+        <div class="metallic-bevel metallic-card-interactive group p-7 rounded-2xl">
+          <div class="w-10 h-10 rounded-lg bg-emerald-500/15 flex items-center justify-center mb-4" style="box-shadow: 0 0 10px rgba(52, 211, 153, 0.15);">
+            <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
           </div>
-          <h3 class="text-lg font-bold text-white mb-2">Zero Upfront Risk</h3>
-          <p class="text-slate-400 leading-relaxed text-sm">
-            Get a working demo before paying a single cent. You see exactly what you're investing in.
-          </p>
+          <h3 class="text-base font-bold text-white mb-2">Zero Upfront Risk</h3>
+          <p class="text-slate-300 leading-relaxed text-base sm:text-sm">Get a working demo before paying a single cent. You see exactly what you're investing in.</p>
         </div>
 
-        <div class="p-8 rounded-2xl bg-slate-800/50 border border-slate-700/50 backdrop-blur-sm">
-          <div class="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center mb-5">
-            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-              ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"
-              ></path></svg
-            >
+        <!-- Card 2 -->
+        <div class="metallic-bevel metallic-card-interactive group p-7 rounded-2xl">
+          <div class="w-10 h-10 rounded-lg bg-blue-500/15 flex items-center justify-center mb-4" style="box-shadow: 0 0 10px rgba(96, 165, 250, 0.15);">
+            <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
           </div>
-          <h3 class="text-lg font-bold text-white mb-2">15-Minute Turnaround</h3>
-          <p class="text-slate-400 leading-relaxed text-sm">
-            Our AI-assisted workflow generates your personalized demo in minutes, not days or weeks.
-          </p>
+          <h3 class="text-base font-bold text-white mb-2">15-Minute Turnaround</h3>
+          <p class="text-slate-300 leading-relaxed text-base sm:text-sm">Our AI-assisted workflow generates your personalized demo in minutes, not days or weeks.</p>
         </div>
 
-        <div class="p-8 rounded-2xl bg-slate-800/50 border border-slate-700/50 backdrop-blur-sm">
-          <div class="w-12 h-12 rounded-lg bg-violet-500/10 flex items-center justify-center mb-5">
-            <svg class="w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-              ><path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path></svg
-            >
+        <!-- Card 3 -->
+        <div class="metallic-bevel metallic-card-interactive group p-7 rounded-2xl">
+          <div class="w-10 h-10 rounded-lg bg-violet-500/15 flex items-center justify-center mb-4" style="box-shadow: 0 0 10px rgba(139, 92, 246, 0.15);">
+            <svg class="w-5 h-5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
           </div>
-          <h3 class="text-lg font-bold text-white mb-2">Transparent Pricing</h3>
-          <p class="text-slate-400 leading-relaxed text-sm">
-            Clear, upfront pricing tiers. No hidden fees, no surprise invoices. You know the cost before we start.
-          </p>
+          <h3 class="text-base font-bold text-white mb-2">Transparent Pricing</h3>
+          <p class="text-slate-300 leading-relaxed text-base sm:text-sm">Clear, upfront pricing tiers. No hidden fees, no surprise invoices. You know the cost before we start.</p>
         </div>
 
-        <div class="p-8 rounded-2xl bg-slate-800/50 border border-slate-700/50 backdrop-blur-sm">
-          <div class="w-12 h-12 rounded-lg bg-amber-500/10 flex items-center justify-center mb-5">
-            <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-              ><path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-              ></path></svg
-            >
+        <!-- Card 4 -->
+        <div class="metallic-bevel metallic-card-interactive group p-7 rounded-2xl">
+          <div class="w-10 h-10 rounded-lg bg-amber-500/15 flex items-center justify-center mb-4" style="box-shadow: 0 0 10px rgba(245, 158, 11, 0.15);">
+            <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
           </div>
-          <h3 class="text-lg font-bold text-white mb-2">Dedicated Expert Team</h3>
-          <p class="text-slate-400 leading-relaxed text-sm">
-            Senior developers and designers only — no juniors, no outsourcing. Direct communication with your team.
-          </p>
+          <h3 class="text-base font-bold text-white mb-2">Dedicated Expert Team</h3>
+          <p class="text-slate-300 leading-relaxed text-base sm:text-sm">Senior developers and designers only — no juniors, no outsourcing. Direct communication with your team.</p>
         </div>
 
-        <div class="p-8 rounded-2xl bg-slate-800/50 border border-slate-700/50 backdrop-blur-sm">
-          <div class="w-12 h-12 rounded-lg bg-rose-500/10 flex items-center justify-center mb-5">
-            <svg class="w-6 h-6 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-              ><path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-              ></path></svg
-            >
+        <!-- Card 5 -->
+        <div class="metallic-bevel metallic-card-interactive group p-7 rounded-2xl">
+          <div class="w-10 h-10 rounded-lg bg-rose-500/15 flex items-center justify-center mb-4" style="box-shadow: 0 0 10px rgba(244, 63, 94, 0.15);">
+            <svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+            </svg>
           </div>
-          <h3 class="text-lg font-bold text-white mb-2">3 Free Revisions</h3>
-          <p class="text-slate-400 leading-relaxed text-sm">
-            Not perfect yet? We refine your project up to three times at no extra cost. Your satisfaction is guaranteed.
-          </p>
+          <h3 class="text-base font-bold text-white mb-2">3 Free Revisions</h3>
+          <p class="text-slate-300 leading-relaxed text-base sm:text-sm">Not perfect yet? We refine your project up to three times at no extra cost. Your satisfaction is guaranteed.</p>
         </div>
 
-        <div class="p-8 rounded-2xl bg-slate-800/50 border border-slate-700/50 backdrop-blur-sm">
-          <div class="w-12 h-12 rounded-lg bg-cyan-500/10 flex items-center justify-center mb-5">
-            <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-              ><path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
-              ></path></svg
-            >
+        <!-- Card 6 -->
+        <div class="metallic-bevel metallic-card-interactive group p-7 rounded-2xl">
+          <div class="w-10 h-10 rounded-lg bg-cyan-500/15 flex items-center justify-center mb-4" style="box-shadow: 0 0 10px rgba(6, 182, 212, 0.15);">
+            <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
+            </svg>
           </div>
-          <h3 class="text-lg font-bold text-white mb-2">Post-Launch Support</h3>
-          <p class="text-slate-400 leading-relaxed text-sm">
-            We don't disappear after delivery. Ongoing maintenance, updates, and optimization — always included.
-          </p>
+          <h3 class="text-base font-bold text-white mb-2">Post-Launch Support</h3>
+          <p class="text-slate-300 leading-relaxed text-base sm:text-sm">We don't disappear after delivery. Ongoing maintenance, updates, and optimization — always included.</p>
         </div>
       </div>
     </div>
@@ -293,225 +267,179 @@ const metadata = {
   <!-- ═══════════════════════════════════════════════════════════════════ -->
   <!-- PRICING TIERS -->
   <!-- ═══════════════════════════════════════════════════════════════════ -->
-  <section class="relative py-24 sm:py-32 bg-slate-50 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-      <div class="text-center mb-20">
+  <section class="relative py-24 sm:py-32 bg-gradient-to-b from-slate-50 to-white overflow-hidden">
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
+    
+    <div class="max-w-6xl mx-auto px-6 sm:px-8">
+      <div class="text-center mb-16 sm:mb-20">
         <p class="text-sm font-semibold tracking-widest text-blue-600 uppercase mb-3">Pricing</p>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900">
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 text-balance">
           Simple, transparent pricing
         </h2>
-        <p class="mt-5 text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+        <p class="mt-5 text-lg text-gray-500 max-w-2xl mx-auto">
           No hidden fees. No surprises. Choose the tier that fits your needs.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
         <!-- Basic -->
-        <div class="w-full bg-white rounded-2xl shadow-sm p-8 border border-gray-200 flex flex-col">
-          <h3 class="text-xl font-bold text-gray-900">Basic Website</h3>
+        <div class="group bg-white rounded-2xl p-8 border border-gray-200 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-50 transition-all duration-300 flex flex-col h-full">
+          <h3 class="text-lg font-bold text-gray-900">Basic Website</h3>
           <div class="mt-4 flex items-baseline">
             <span class="text-4xl font-extrabold text-gray-900">$1,500</span>
           </div>
-          <p class="mt-2 text-sm text-gray-500">3–7 days delivery</p>
-          <ul class="mt-6 space-y-3 flex-1">
-            <li class="flex items-start gap-3 text-sm text-gray-600">
-              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
-              >
+          <p class="mt-1 text-sm text-gray-400">3–7 days delivery</p>
+          <div class="mt-6 border-t border-gray-100 pt-6 space-y-3 flex-1">
+            <div class="flex items-start gap-3 text-base sm:text-sm text-gray-600">
+              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
               1–5 page responsive website
-            </li>
-            <li class="flex items-start gap-3 text-sm text-gray-600">
-              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
-              >
+            </div>
+            <div class="flex items-start gap-3 text-base sm:text-sm text-gray-600">
+              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
               Mobile-first design
-            </li>
-            <li class="flex items-start gap-3 text-sm text-gray-600">
-              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
-              >
+            </div>
+            <div class="flex items-start gap-3 text-base sm:text-sm text-gray-600">
+              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
               SEO optimization
-            </li>
-            <li class="flex items-start gap-3 text-sm text-gray-600">
-              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
-              >
+            </div>
+            <div class="flex items-start gap-3 text-base sm:text-sm text-gray-600">
+              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
               Contact form with validation
-            </li>
-            <li class="flex items-start gap-3 text-sm text-gray-600">
-              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
-              >
+            </div>
+            <div class="flex items-start gap-3 text-base sm:text-sm text-gray-600">
+              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
               Core Web Vitals optimized
-            </li>
-          </ul>
-          <a
-            href="/start-project"
-            class="mt-8 block text-center px-6 py-3 rounded-xl border-2 border-blue-600 text-blue-600 font-semibold hover:bg-blue-50 transition-colors"
-          >
+            </div>
+          </div>
+          <a href="/start-project" class="mt-8 block text-center px-6 py-3 rounded-xl border-2 border-blue-600 text-blue-600 font-semibold hover:bg-blue-600 hover:text-white transition-all duration-200">
             Get Started
           </a>
         </div>
 
         <!-- Standard (highlighted) -->
-        <div class="w-full bg-white rounded-2xl shadow-xl p-8 border-2 border-blue-600 flex flex-col relative">
-          <div
-            class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-blue-600 text-white text-xs font-bold rounded-full uppercase tracking-wide"
-          >
+        <div class="relative bg-white rounded-2xl p-8 border-2 border-blue-600 shadow-xl shadow-blue-100/50 flex flex-col h-full">
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-blue-600 text-white text-xs font-bold rounded-full uppercase tracking-wide">
             Most Popular
           </div>
-          <h3 class="text-xl font-bold text-gray-900">Standard Website</h3>
+          <h3 class="text-lg font-bold text-gray-900">Standard Website</h3>
           <div class="mt-4 flex items-baseline">
             <span class="text-4xl font-extrabold text-gray-900">$5,000</span>
           </div>
-          <p class="mt-2 text-sm text-gray-500">1–3 weeks delivery</p>
-          <ul class="mt-6 space-y-3 flex-1">
-            <li class="flex items-start gap-3 text-sm text-gray-600">
-              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
-              >
+          <p class="mt-1 text-sm text-gray-400">1–3 weeks delivery</p>
+          <div class="mt-6 border-t border-gray-100 pt-6 space-y-3 flex-1">
+            <div class="flex items-start gap-3 text-base sm:text-sm text-gray-600">
+              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
               Everything in Basic, plus:
-            </li>
-            <li class="flex items-start gap-3 text-sm text-gray-600">
-              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
-              >
-              Custom design &amp; branding
-            </li>
-            <li class="flex items-start gap-3 text-sm text-gray-600">
-              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
-              >
+            </div>
+            <div class="flex items-start gap-3 text-base sm:text-sm text-gray-600">
+              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Custom design & branding
+            </div>
+            <div class="flex items-start gap-3 text-base sm:text-sm text-gray-600">
+              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
               CMS integration
-            </li>
-            <li class="flex items-start gap-3 text-sm text-gray-600">
-              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
-              >
+            </div>
+            <div class="flex items-start gap-3 text-base sm:text-sm text-gray-600">
+              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
               Scroll-driven animations
-            </li>
-            <li class="flex items-start gap-3 text-sm text-gray-600">
-              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
-              >
+            </div>
+            <div class="flex items-start gap-3 text-base sm:text-sm text-gray-600">
+              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
               Analytics setup
-            </li>
-            <li class="flex items-start gap-3 text-sm text-gray-600">
-              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
-              >
+            </div>
+            <div class="flex items-start gap-3 text-base sm:text-sm text-gray-600">
+              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
               Chatbot / AI assistant
-            </li>
-          </ul>
-          <a
-            href="/start-project"
-            class="mt-8 block text-center px-6 py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors"
-          >
+            </div>
+          </div>
+          <a href="/start-project" class="mt-8 block text-center px-6 py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-all duration-200 shadow-lg shadow-blue-600/25">
             Get Started
           </a>
         </div>
 
         <!-- Premium -->
-        <div class="w-full bg-white rounded-2xl shadow-sm p-8 border border-gray-200 flex flex-col">
-          <h3 class="text-xl font-bold text-gray-900">Premium Full-Stack</h3>
+        <div class="group bg-white rounded-2xl p-8 border border-gray-200 hover:border-violet-200 hover:shadow-xl hover:shadow-violet-50 transition-all duration-300 flex flex-col h-full">
+          <h3 class="text-lg font-bold text-gray-900">Premium Full-Stack</h3>
           <div class="mt-4 flex items-baseline">
             <span class="text-4xl font-extrabold text-gray-900">$15,000+</span>
           </div>
-          <p class="mt-2 text-sm text-gray-500">3–8 weeks delivery</p>
-          <ul class="mt-6 space-y-3 flex-1">
-            <li class="flex items-start gap-3 text-sm text-gray-600">
-              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
-              >
+          <p class="mt-1 text-sm text-gray-400">3–8 weeks delivery</p>
+          <div class="mt-6 border-t border-gray-100 pt-6 space-y-3 flex-1">
+            <div class="flex items-start gap-3 text-base sm:text-sm text-gray-600">
+              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
               Everything in Standard, plus:
-            </li>
-            <li class="flex items-start gap-3 text-sm text-gray-600">
-              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
-              >
+            </div>
+            <div class="flex items-start gap-3 text-base sm:text-sm text-gray-600">
+              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
               Full-stack application
-            </li>
-            <li class="flex items-start gap-3 text-sm text-gray-600">
-              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
-              >
-              Database &amp; authentication
-            </li>
-            <li class="flex items-start gap-3 text-sm text-gray-600">
-              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
-              >
+            </div>
+            <div class="flex items-start gap-3 text-base sm:text-sm text-gray-600">
+              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Database & authentication
+            </div>
+            <div class="flex items-start gap-3 text-base sm:text-sm text-gray-600">
+              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
               E-commerce / payments
-            </li>
-            <li class="flex items-start gap-3 text-sm text-gray-600">
-              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
-              >
-              CI/CD pipeline &amp; DevOps
-            </li>
-            <li class="flex items-start gap-3 text-sm text-gray-600">
-              <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg
-              >
-              Ongoing maintenance &amp; support
-            </li>
-          </ul>
-          <a
-            href="/start-project"
-            class="mt-8 block text-center px-6 py-3 rounded-xl border-2 border-blue-600 text-blue-600 font-semibold hover:bg-blue-50 transition-colors"
-          >
+            </div>
+            <div class="flex items-start gap-3 text-base sm:text-sm text-gray-600">
+              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              CI/CD pipeline & DevOps
+            </div>
+            <div class="flex items-start gap-3 text-base sm:text-sm text-gray-600">
+              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Ongoing maintenance & support
+            </div>
+          </div>
+          <a href="/start-project" class="mt-8 block text-center px-6 py-3 rounded-xl border-2 border-blue-600 text-blue-600 font-semibold hover:bg-blue-600 hover:text-white transition-all duration-200">
             Get Started
           </a>
         </div>
       </div>
 
       <!-- Add-ons -->
-      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-16">
-        <div class="p-8 rounded-2xl border border-gray-200 bg-white shadow-sm flex flex-col h-full">
-          <h3 class="text-xl font-bold text-gray-900">Android App Packaging</h3>
-          <div class="mt-2 text-2xl font-extrabold text-blue-600">+$3,000</div>
-          <p class="mt-4 text-gray-600 leading-relaxed flex-1">
-            Convert your website into a native Android app. Play Store submission ready, offline support, push
-            notifications.
-          </p>
+      <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mt-12">
+        <div class="p-6 rounded-2xl border border-gray-200 bg-white hover:shadow-md transition-shadow">
+          <h3 class="text-lg font-bold text-gray-900">Android App Packaging</h3>
+          <div class="mt-1 text-2xl font-extrabold text-blue-600">+$3,000</div>
+          <p class="mt-3 text-gray-500 text-sm leading-relaxed">Convert your website into a native Android app. Play Store submission ready, offline support, push notifications.</p>
         </div>
-        <div class="p-8 rounded-2xl border border-gray-200 bg-white shadow-sm flex flex-col h-full">
-          <h3 class="text-xl font-bold text-gray-900">Custom Integrations</h3>
-          <div class="mt-2 text-2xl font-extrabold text-blue-600">+$2,000</div>
-          <p class="mt-4 text-gray-600 leading-relaxed flex-1">
-            Third-party API integrations, payment gateways, CRM connections, custom automation workflows.
-          </p>
+        <div class="p-6 rounded-2xl border border-gray-200 bg-white hover:shadow-md transition-shadow">
+          <h3 class="text-lg font-bold text-gray-900">Custom Integrations</h3>
+          <div class="mt-1 text-2xl font-extrabold text-blue-600">+$2,000</div>
+          <p class="mt-3 text-gray-500 text-sm leading-relaxed">Third-party API integrations, payment gateways, CRM connections, custom automation workflows.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════════ -->
-  <!-- CTA -->
+  <!-- CTA — Final conversion push -->
   <!-- ═══════════════════════════════════════════════════════════════════ -->
-  <section class="relative py-24 sm:py-32 bg-gradient-to-br from-blue-600 via-indigo-600 to-violet-700 overflow-hidden">
-    <div
-      class="absolute inset-0 opacity-10"
-      style="background-image: url('/tech-dark.jpg'); background-size: cover; background-position: center;"
-    >
+  <section class="relative py-24 sm:py-32 overflow-hidden bg-slate-950">
+    <!-- Gradient mesh -->
+    <div class="absolute inset-0">
+      <div class="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[160px]"></div>
     </div>
-    <div class="relative z-10 max-w-4xl mx-auto px-6 sm:px-8 text-center">
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 48px 48px;"></div>
+
+    <div class="relative z-10 max-w-3xl mx-auto px-6 sm:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white text-balance">
         Ready to see what your project looks like?
       </h2>
-      <p class="mt-6 text-lg text-blue-100 leading-relaxed max-w-2xl mx-auto">
+      <p class="mt-6 text-lg text-slate-300 leading-relaxed max-w-xl mx-auto">
         Start with a free demo. No commitment, no credit card. Just a personalized preview of your future project.
       </p>
       <a
         href="/start-project"
-        class="mt-10 inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl bg-white text-blue-600 hover:bg-blue-50 transition-all shadow-xl hover:scale-[1.02]"
+        class="mt-10 glossy-button inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl text-white"
       >
         Start Your Free Demo
-        <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-          ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"
-          ></path></svg
-        >
+        <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
       </a>
+      <p class="mt-6 text-sm text-slate-500">Free demo • No credit card • 15 min turnaround</p>
     </div>
   </section>
 </Layout>

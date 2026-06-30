@@ -11,9 +11,9 @@
 
   // ── Styles ──
   const styles = [
-    '#qm-chat-btn{position:fixed;bottom:16px!important;right:16px;z-index:8000;width:56px;height:56px;border-radius:50%;background:#2563eb;color:white;border:none;font-size:26px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.18);display:flex;align-items:center;justify-content:center;transition:transform 0.2s;}',
+    '#qm-chat-btn{position:fixed;bottom:max(16px,env(safe-area-inset-bottom))!important;right:16px!important;z-index:8000;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#7c3aed);color:white;border:none;font-size:26px;cursor:pointer;box-shadow:0 4px 20px rgba(37,99,235,0.4);display:flex;align-items:center;justify-content:center;transition:transform 0.2s;}',
     '#qm-chat-btn:hover{transform:scale(1.08);}',
-    '#qm-chat-box{position:fixed;bottom:84px!important;right:16px;z-index:8000;width:calc(100vw - 32px);max-width:360px;max-height:560px;border-radius:16px;background:#fff;box-shadow:0 8px 32px rgba(0,0,0,0.18);display:none;flex-direction:column;overflow:hidden;font-family:system-ui,sans-serif;}',
+    '#qm-chat-box{position:fixed;bottom:max(84px,calc(env(safe-area-inset-bottom) + 84px))!important;right:16px!important;z-index:8000;width:calc(100vw - 32px);max-width:360px;max-height:560px;border-radius:16px;background:#fff;box-shadow:0 8px 32px rgba(0,0,0,0.18);display:none;flex-direction:column;overflow:hidden;font-family:system-ui,sans-serif;}',
     '#qm-chat-header{background:linear-gradient(135deg,#2563eb,#7c3aed);color:white;padding:12px 16px;font-weight:600;font-size:15px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,0.1);}',
     '#qm-chat-header .qm-avatar{width:36px;height:36px;border-radius:50%;border:2px solid rgba(255,255,255,0.6);object-fit:cover;flex-shrink:0;}',
     '#qm-chat-header .qm-header-text{display:flex;flex-direction:column;line-height:1.2;}',

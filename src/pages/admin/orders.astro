@@ -1,0 +1,216 @@
+---
+// /root/CompanyWebsite/src/pages/admin/orders.astro
+// Admin order management — protected by ?admin_secret query param
+import Layout from '~/layouts/Layout.astro';
+---
+
+<Layout title="Admin — Orders">
+  <main class="min-h-screen bg-slate-950">
+    <header class="bg-slate-900 border-b border-white/10">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <h1 class="text-xl font-bold text-white">Order Management</h1>
+        <a href="/" class="text-sm text-indigo-400 hover:text-indigo-300">← Back to site</a>
+      </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-6 py-8">
+      <!-- Loading -->
+      <div id="admin-loading" class="text-center py-16">
+        <div class="animate-pulse">
+          <div class="h-8 bg-slate-700 rounded w-48 mx-auto mb-4"></div>
+          <div class="h-4 bg-slate-700 rounded w-64 mx-auto"></div>
+        </div>
+      </div>
+
+      <!-- Access Denied -->
+      <div id="admin-denied" class="hidden max-w-md mx-auto py-16 text-center">
+        <div class="text-4xl mb-4">🔒</div>
+        <h2 class="text-xl font-bold text-white mb-2">Access Denied</h2>
+        <p class="text-slate-400">Invalid or missing admin secret.</p>
+      </div>
+
+      <!-- Orders Table -->
+      <div id="admin-content" class="hidden">
+        <div class="metallic-bevel-glow rounded-xl overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="bg-slate-800/80 border-b border-white/10">
+                <tr>
+                  <th class="px-4 py-3 text-left font-semibold text-slate-300">Order ID</th>
+                  <th class="px-4 py-3 text-left font-semibold text-slate-300">Business</th>
+                  <th class="px-4 py-3 text-left font-semibold text-slate-300">Trade</th>
+                  <th class="px-4 py-3 text-left font-semibold text-slate-300">Customer</th>
+                  <th class="px-4 py-3 text-left font-semibold text-slate-300">Status</th>
+                  <th class="px-4 py-3 text-left font-semibold text-slate-300">Date</th>
+                  <th class="px-4 py-3 text-left font-semibold text-slate-300">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="orders-tbody" class="divide-y divide-white/5">
+                <!-- Rows rendered by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p id="order-count" class="text-sm text-slate-500 mt-4"></p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const STATUS_COLORS = {
+      'intake': 'bg-amber-500/20 text-amber-300 ring-1 ring-amber-500/30',
+      'pending': 'bg-amber-500/20 text-amber-300 ring-1 ring-amber-500/30',
+      'ready': 'bg-emerald-500/20 text-emerald-300 ring-1 ring-emerald-500/30',
+      'approved': 'bg-purple-500/20 text-purple-300 ring-1 ring-purple-500/30',
+      'paid': 'bg-indigo-500/20 text-indigo-300 ring-1 ring-indigo-500/30',
+      'delivered': 'bg-emerald-500/20 text-emerald-300 ring-1 ring-emerald-500/30'
+    };
+
+    const VALID_STATUSES = ['intake', 'pending', 'ready', 'approved', 'paid', 'delivered'];
+
+    function getAdminSecret() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('admin_secret') || '';
+    }
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '—';
+      return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    let expandedOrderId = null;
+
+    function toggleDetail(orderId) {
+      const el = document.getElementById('detail-' + orderId);
+      if (!el) return;
+      if (expandedOrderId === orderId) {
+        el.classList.add('hidden');
+        expandedOrderId = null;
+      } else {
+        if (expandedOrderId) {
+          const prev = document.getElementById('detail-' + expandedOrderId);
+          if (prev) prev.classList.add('hidden');
+        }
+        el.classList.remove('hidden');
+        expandedOrderId = orderId;
+      }
+    }
+
+    async function loadOrders() {
+      const loadingEl = document.getElementById('admin-loading');
+      const deniedEl = document.getElementById('admin-denied');
+      const contentEl = document.getElementById('admin-content');
+      const tbody = document.getElementById('orders-tbody');
+      const countEl = document.getElementById('order-count');
+
+      const secret = getAdminSecret();
+
+      try {
+        const res = await fetch('/api/admin/orders?admin_secret=' + encodeURIComponent(secret), {
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.status === 404 || res.status === 403) {
+          loadingEl.classList.add('hidden');
+          deniedEl.classList.remove('hidden');
+          return;
+        }
+
+        const data = await res.json();
+
+        if (!data.orders || data.orders.length === 0) {
+          loadingEl.classList.add('hidden');
+          contentEl.classList.remove('hidden');
+          tbody.innerHTML = '<tr><td colspan="7" class="px-4 py-8 text-center text-slate-500">No orders found</td></tr>';
+          return;
+        }
+
+        loadingEl.classList.add('hidden');
+        contentEl.classList.remove('hidden');
+        countEl.textContent = data.orders.length + ' order(s)';
+
+        tbody.innerHTML = data.orders.map(order => {
+          const statusColor = STATUS_COLORS[order.status] || 'bg-slate-700 text-slate-300';
+          const statusOptions = VALID_STATUSES.map(s =>
+            `<option value="${s}" ${s === order.status ? 'selected' : ''}>${s.charAt(0).toUpperCase() + s.slice(1)}</option>`
+          ).join('');
+
+          return `
+            <tr class="hover:bg-white/[0.02] transition-colors">
+              <td class="px-4 py-3 font-mono text-xs text-indigo-400">${order.order_id}</td>
+              <td class="px-4 py-3 text-slate-200 text-xs">${order.business_name || '—'}</td>
+              <td class="px-4 py-3 text-slate-400 text-xs">${order.trade || order.product_type || '—'}</td>
+              <td class="px-4 py-3">
+                <div class="text-slate-200 text-xs">${order.customer_email}</div>
+                ${order.customer_phone ? `<div class="text-slate-500 text-[10px]">${order.customer_phone}</div>` : ''}
+              </td>
+              <td class="px-4 py-3">
+                <span class="px-2 py-1 rounded-full text-xs font-medium ${statusColor}">${order.status_label}</span>
+              </td>
+              <td class="px-4 py-3 text-slate-500 text-xs">${formatDate(order.created_at)}</td>
+              <td class="px-4 py-3">
+                <div class="flex items-center gap-2">
+                  <select onchange="updateStatus('${order.order_id}', this.value)" class="text-xs bg-slate-800 border border-white/10 rounded px-2 py-1 text-slate-200">
+                    ${statusOptions}
+                  </select>
+                  <button onclick="toggleDetail('${order.order_id}')" class="text-xs text-indigo-400 hover:text-indigo-300 px-2 py-1 rounded bg-indigo-500/10 hover:bg-indigo-500/20 transition-colors">Details</button>
+                  ${order.demo_token ? `<a href="/demo/${order.demo_token}" target="_blank" class="text-xs text-emerald-400 hover:text-emerald-300 px-2 py-1 rounded bg-emerald-500/10 hover:bg-emerald-500/20 transition-colors">View</a>` : ''}
+                </div>
+              </td>
+            </tr>
+            <tr id="detail-${order.order_id}" class="hidden">
+              <td colspan="7" class="px-4 py-0">
+                <div class="bg-slate-800/50 rounded-lg p-4 my-2 border border-white/5">
+                  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                    <div><span class="text-slate-500 block">Business</span><span class="text-slate-200">${order.business_name || '—'}</span></div>
+                    <div><span class="text-slate-500 block">Trade</span><span class="text-slate-200">${order.trade || '—'}</span></div>
+                    <div><span class="text-slate-500 block">Location</span><span class="text-slate-200">${order.location || '—'}</span></div>
+                    <div><span class="text-slate-500 block">Style</span><span class="text-slate-200">${order.visual_style || '—'}</span></div>
+                    <div><span class="text-slate-500 block">Color</span><span class="text-slate-200">${order.color_preference || '—'}</span></div>
+                    <div><span class="text-slate-500 block">Goal</span><span class="text-slate-200">${order.goal || '—'}</span></div>
+                    <div><span class="text-slate-500 block">Logo</span><span class="text-slate-200">${order.has_logo ? 'Yes' : 'No'}</span></div>
+                    <div><span class="text-slate-500 block">Website</span><span class="text-slate-200">${order.current_website || '—'}</span></div>
+                  </div>
+                  ${order.services ? `<div class="mt-3 pt-3 border-t border-white/5"><span class="text-slate-500 block text-xs mb-1">Services</span><span class="text-slate-200 text-xs">${order.services}</span></div>` : ''}
+                  ${order.brief ? `<div class="mt-2"><span class="text-slate-500 block text-xs mb-1">Brief</span><span class="text-slate-300 text-xs">${order.brief}</span></div>` : ''}
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+
+      } catch (err) {
+        console.error('Admin load error:', err);
+        loadingEl.classList.add('hidden');
+        deniedEl.classList.remove('hidden');
+      }
+    }
+
+    async function updateStatus(orderId, newStatus) {
+      const secret = getAdminSecret();
+      try {
+        const res = await fetch('/api/admin/update-status', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-admin-secret': secret
+          },
+          body: JSON.stringify({ order_id: orderId, status: newStatus })
+        });
+
+        if (res.ok) {
+          loadOrders();
+        } else {
+          const data = await res.json();
+          alert(data.error || 'Failed to update status');
+        }
+      } catch (err) {
+        alert('Network error: ' + err.message);
+      }
+    }
+
+    window.updateStatus = updateStatus;
+    window.toggleDetail = toggleDetail;
+    loadOrders();
+  </script>
+</Layout>
