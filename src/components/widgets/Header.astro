@@ -47,10 +47,10 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 ---
 
 <header
-  class="fixed top-0 left-0 right-0 z-[9000] w-full border-b border-white/5 backdrop-blur-md bg-slate-950/80 transition-[opacity] ease-in-out"
+  class="fixed top-0 left-0 right-0 z-[9000] w-full border-b border-gray-200 bg-white transition-[background-color,box-shadow] duration-200 ease-in-out"
   style="padding-top: max(12px, env(safe-area-inset-top));"
   {...isSticky ? { 'data-aw-sticky-header': true } : {}}
-  {...id ? { id } : {}}
+  {...id ? { id } : {}}>
 >
   <div class="relative mx-auto w-full max-w-7xl flex items-center justify-between px-5 md:px-8" style="min-height: 52px;">
     <!-- Logo + Mobile Menu Toggle -->
@@ -76,16 +76,16 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                 <>
                   <button
                     type="button"
-                    class="flex items-center gap-1 px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors whitespace-nowrap"
+                    class="flex items-center gap-1 px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors whitespace-nowrap"
                   >
                     {text}
                     <Icon name="tabler:chevron-down" class="w-3.5 h-3.5" />
                   </button>
-                  <ul class="dropdown-menu absolute mt-2 rounded-lg bg-slate-900/95 backdrop-blur-md border border-white/10 shadow-xl py-2 min-w-[200px]">
+                  <ul class="dropdown-menu absolute mt-2 rounded-lg bg-white border border-gray-200 shadow-xl py-2 min-w-[200px]">
                     {subLinks.map(({ text: text2, href: href2 }) => (
                       <li>
                         <a
-                          class="block px-4 py-2 text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
+                          class="block px-4 py-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-colors"
                           href={href2}
                         >
                           {text2}
@@ -99,8 +99,8 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                   class:list={[
                     'px-4 py-2 text-sm font-medium transition-colors whitespace-nowrap',
                     href === currentPath
-                      ? 'text-white'
-                      : 'text-slate-300 hover:text-white',
+                      ? 'text-gray-900'
+                      : 'text-gray-700 hover:text-gray-900',
                   ]}
                   href={href}
                 >
@@ -115,7 +115,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 
     <!-- Actions -->
     <div class="flex items-center gap-3 flex-shrink-0">
-      {showToggleTheme && <ToggleTheme iconClass="w-5 h-5 text-slate-300" />}
+      {showToggleTheme && <ToggleTheme iconClass="w-5 h-5 text-gray-700" />}
       {
         actions?.length
           ? actions.map((btnProps) => (

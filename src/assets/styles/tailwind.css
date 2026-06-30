@@ -243,21 +243,23 @@
 #header.scroll > div:first-child {
   background-color: rgb(255 255 255);
   @media (min-width: 768px) {
-    background-color: rgb(255 255 255 / 0.9);
-    backdrop-filter: blur(12px);
+    background-color: rgb(255 255 255);
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   }
-  box-shadow: 0 0.375rem 1.5rem 0 rgb(140 152 164 / 13%);
 }
 .dark #header.scroll > div:first-child,
 #header.scroll.dark > div:first-child {
-  background-color: rgb(3 6 32);
+  background-color: rgb(255 255 255);
   @media (min-width: 768px) {
-    background-color: rgb(3 6 32 / 0.9);
-    border-bottom: 1px solid rgb(107 114 128 / 0.2);
+    background-color: rgb(255 255 255);
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    border-bottom: 1px solid rgb(229 229 229);
   }
-  box-shadow: none;
 }
 
+#header.expanded {
+  background-color: white;
+}
 #header.expanded nav {
   position: fixed;
   top: 70px;
@@ -265,6 +267,7 @@
   right: 0;
   bottom: 70px !important;
   padding: 0 5px;
+  background-color: white;
 }
 
 .dropdown:focus .dropdown-menu,
