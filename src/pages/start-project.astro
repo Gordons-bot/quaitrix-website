@@ -31,13 +31,13 @@ import PageLayout from '~/layouts/PageLayout.astro';
         </div>
         <div class="flex flex-col items-center flex-1">
           <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all bg-slate-700 text-slate-400" id="step-dot-5">5</div>
-          <span class="text-xs text-slate-500 mt-1 hidden sm:block">Design</span>
+          <span class="text-xs text-slate-500 mt-1 hidden sm:block">Requirements</span>
         </div>
       </div>
 
       <!-- Auth Buttons -->
-      <div id="auth-buttons" class="auth-buttons mb-8 text-center">
-        <a href="/api/oauth/start" class="inline-flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 rounded-lg shadow-sm hover:shadow-md transition-shadow text-gray-700 font-medium">
+      <div id="auth-buttons" class="auth-buttons mb-8 text-center flex flex-col sm:flex-row gap-4 justify-center">
+        <button id="google-signin" type="button" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 transition-colors font-medium text-base w-full sm:w-auto">
           <svg width="20" height="20" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
             <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -45,8 +45,8 @@ import PageLayout from '~/layouts/PageLayout.astro';
             <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
           </svg>
           Continue with Google
-        </a>
-        <button onclick="document.querySelector('#email-form').classList.remove('hidden')" class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg shadow-sm hover:shadow-md transition-shadow font-medium ml-4">
+        </button>
+        <button onclick="document.querySelector('#email-form').classList.remove('hidden')" class="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-lg shadow-sm hover:shadow-md transition-shadow font-medium w-full sm:w-auto">
           Sign up with Email
         </button>
       </div>
@@ -281,6 +281,88 @@ import PageLayout from '~/layouts/PageLayout.astro';
           </div>
         </div>
 
+        <!-- ═══ STEP 5: Project Requirements ═══ -->
+        <div class="slide hidden" id="slide-5">
+          <h3 class="text-xl sm:text-2xl font-bold mb-6 text-white"><span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-indigo-600 text-sm font-bold mr-2">5</span>Project Requirements</h3>
+          <div class="space-y-6">
+            <!-- Requirements Textarea with Chips -->
+            <div>
+              <label for="requirements" class="block text-sm font-semibold text-slate-300 mb-2">
+                Project Requirements <span class="text-red-400">*</span>
+              </label>
+              
+              <p class="text-xs text-slate-500 mb-3">
+                Tell us what you need — e.g., "A site where customers can browse our menu and place orders, plus a simple dashboard for staff to see incoming orders."
+              </p>
+              
+              <!-- Smart Suggestion Chips -->
+              <div class="flex flex-wrap gap-2 mb-3">
+                <button type="button" 
+                       class="chip px-3 py-1.5 text-sm bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full transition-colors border border-slate-700 hover:border-slate-600"
+                       data-value="Online ordering system">
+                  Online ordering
+                </button>
+                <button type="button" 
+                       class="chip px-3 py-1.5 text-sm bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full transition-colors border border-slate-700 hover:border-slate-600"
+                       data-value="Booking/appointment system">
+                  Booking system
+                </button>
+                <button type="button" 
+                       class="chip px-3 py-1.5 text-sm bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full transition-colors border border-slate-700 hover:border-slate-600"
+                       data-value="Customer dashboard">
+                  Customer dashboard
+                </button>
+                <button type="button" 
+                       class="chip px-3 py-1.5 text-sm bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full transition-colors border border-slate-700 hover:border-slate-600"
+                       data-value="Blog/News section">
+                  Blog
+                </button>
+                <button type="button" 
+                       class="chip px-3 py-1.5 text-sm bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full transition-colors border border-slate-700 hover:border-slate-600"
+                       data-value="E-commerce functionality">
+                  E-commerce
+                </button>
+                <button type="button" 
+                       class="chip px-3 py-1.5 text-sm bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full transition-colors border border-slate-700 hover:border-slate-600"
+                       data-value="Contact forms">
+                  Contact forms
+                </button>
+              </div>
+              
+              <textarea 
+                id="requirements"
+                name="requirements"
+                rows="6"
+                required
+                class="inset-input w-full p-4 rounded-xl text-base min-h-[52px] resize-y"
+                placeholder="Describe your project in detail. What features do you need? Who is your target audience? What problems should this website solve?"></textarea>
+              
+              <p class="mt-2 text-xs text-slate-500">
+                The more detail you provide, the better your demo will be.
+              </p>
+            </div>
+
+            <!-- Reference Links (Optional) -->
+            <div>
+              <label for="referenceLinks" class="block text-sm font-semibold text-slate-300 mb-2">
+                Links to Sites You Like (Optional)
+              </label>
+              
+              <input 
+                type="url"
+                id="referenceLinks"
+                name="referenceLinks"
+                multiple
+                class="inset-input w-full p-4 rounded-xl text-base min-h-[52px]"
+                placeholder="https://example.com, https://yoursite.com (if you have one)" />
+              
+              <p class="mt-2 text-xs text-slate-500">
+                Share links to websites you like or your current site for inspiration.
+              </p>
+            </div>
+          </div>
+        </div>
+
       </form>
 
       <!-- Navigation Buttons -->
@@ -297,7 +379,7 @@ import PageLayout from '~/layouts/PageLayout.astro';
 
   <script is:inline>
     // Slide sequence: supports numeric + named slides (e.g., "2b")
-    var slideSequence = ['1', '2', '2b', '3', '4'];
+    var slideSequence = ['1', '2', '2b', '3', '4', '5'];
     var currentIdx = 0;
 
     function currentSlideId() { return slideSequence[currentIdx]; }
@@ -399,6 +481,8 @@ import PageLayout from '~/layouts/PageLayout.astro';
         designPreference: styleMap[getRadio('visual_style')] || null,
         existingPresence: existingPresence.trim() || null,
         designReferences: designReferences.trim() || null,
+        requirements: document.getElementById('requirements').value.trim() || null,
+        referenceLinks: document.getElementById('referenceLinks').value.trim() || null,
         contact: {
           name: document.getElementById('contact_name').value,
           phone: document.getElementById('contact_phone').value,
@@ -473,46 +557,131 @@ import PageLayout from '~/layouts/PageLayout.astro';
       formEl.addEventListener('change', updateButtons);
     }
 
-    updateProgress();
-    updateButtons();
-
-    window.changeSlide = changeSlide;
-    window.submitForm = submitForm;
-    window.signInWithGoogle = signInWithGoogle;
-
-    // Better Auth client for Google OAuth
-    async function signInWithGoogle() {
-      try {
-        const { createAuthClient } = await import('better-auth/client');
-        const authClient = createAuthClient({
-          baseURL: 'https://quaitrix.com'
-        });
-        await authClient.signIn.social({
-          provider: 'google',
-        });
-      } catch (err) {
-        console.error('Google sign-in error:', err);
-        alert('Failed to sign in with Google. Please try again.');
-      }
-    }
-
-    // Auto-fill from auth session
-    (async () => {
-      try {
-        const res = await fetch('/api/me', { credentials: 'include' });
-        if (!res.ok) return;
+    // Chip click handlers - append to textarea
+    document.querySelectorAll('.chip').forEach(function(chip) {
+      chip.addEventListener('click', function() {
+        var textarea = document.getElementById('requirements');
+        var value = this.getAttribute('data-value');
         
-        const me = await res.json();
-        if (!me.authenticated) return;
+        // Add value to textarea (with comma if not empty)
+        if (textarea.value) {
+          textarea.value += ', ' + value;
+        } else {
+          textarea.value = value;
+        }
         
-        const form = document.querySelector('#projectForm');
-        if (form && form.name) form.name.value = me.name ?? '';
-        if (form && form.email) form.email.value = me.email ?? '';
+        // Visual feedback
+        this.classList.add('bg-indigo-900', 'text-indigo-300', 'border-indigo-600');
+        var chipRef = this;
+        setTimeout(function() {
+          chipRef.classList.remove('bg-indigo-900', 'text-indigo-300', 'border-indigo-600');
+        }, 300);
         
-        document.querySelector('#auth-buttons')?.classList.add('hidden');
-      } catch (err) {
-        console.error('Auto-fill error:', err);
-      }
-    })();
-  </script>
-</PageLayout>
+        // Focus textarea
+        textarea.focus();
+      });
+    });
+
+    </script>
+
+    <script is:inline>
+      // Auto-fill form if user is logged in with Google
+      (async function autoFillForm() {
+        try {
+          console.log("🔍 Checking for active session...");
+          
+          const res = await fetch("/api/auth/get-session", {
+            credentials: "include"
+          });
+          
+          if (!res.ok) {
+            console.log("❌ Session request failed:", res.status);
+            return;
+          }
+          
+          const data = await res.json();
+          
+          if (!data || !data.user) {
+            console.log("ℹ️ No active session - user not logged in");
+            return;
+          }
+          
+          console.log("✅ Session found:", data.user);
+          
+          // Wait for DOM to be ready
+          if (!document.querySelector("form")) {
+            console.log("⏳ Waiting for form to load...");
+            await new Promise(resolve => setTimeout(resolve, 500));
+          }
+          
+          // Find the form
+          const form = document.querySelector("form");
+          if (!form) {
+            console.error("❌ Form not found in DOM");
+            return;
+          }
+          
+          // Auto-fill name field
+          const nameInput = form.querySelector('input[name="name"]') || 
+                            form.querySelector('input[id="name"]') ||
+                            form.querySelector('input[placeholder*="Full Name"]') ||
+                            document.getElementById('contact_name');
+          
+          if (nameInput && data.user.name) {
+            nameInput.value = data.user.name;
+            console.log("✅ Auto-filled name:", data.user.name);
+          }
+          
+          // Auto-fill email field
+          const emailInput = form.querySelector('input[name="email"]') || 
+                           form.querySelector('input[id="email"]') ||
+                           form.querySelector('input[placeholder*="Email"]') ||
+                           document.getElementById('contact_email');
+          
+          if (emailInput && data.user.email) {
+            emailInput.value = data.user.email;
+            console.log("✅ Auto-filled email:", data.user.email);
+          }
+          
+          console.log("🎉 Form auto-fill complete!");
+          
+        } catch (err) {
+          console.error("❌ Auto-fill error:", err);
+        }
+      })();
+    </script>
+
+    <script is:inline>
+      document.getElementById("google-signin").addEventListener("click", async function () {
+        var btn = document.getElementById("google-signin");
+        btn.disabled = true;
+        try {
+          var res = await fetch("/api/auth/sign-in/social", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify({
+              provider: "google",
+              callbackURL: "https://quaitrix.com/start-project"
+            })
+          });
+          if (!res.ok) {
+            console.error("Sign-in failed:", res.status, await res.text());
+            btn.disabled = false;
+            return;
+          }
+          var data = await res.json();
+          if (data.url) {
+            window.location.href = data.url;
+          } else {
+            console.error("No url in response:", data);
+            btn.disabled = false;
+          }
+        } catch (err) {
+          console.error("Sign-in error:", err);
+          btn.disabled = false;
+        }
+      });
+    </script>
+
+    </PageLayout>
